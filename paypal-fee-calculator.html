@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayPal Fee Calculator (2026) — Checkout, International, Micropayments | netfee.io</title>
+  <meta name="description" content="Calculate your exact PayPal transaction fee and net take-home. Current 2026 rates for Checkout, international, currency conversion, and micropayments.">
+  <link rel="canonical" href="https://netfee.io/paypal-fee-calculator">
+
+  <meta property="og:title" content="PayPal Fee Calculator (2026) — Exact Fees in Real Time">
+  <meta property="og:description" content="Calculate your exact PayPal fee and net take-home. Current 2026 rates for all PayPal payment types.">
+  <meta property="og:url" content="https://netfee.io/paypal-fee-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="netfee.io">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PayPal Fee Calculator (2026)">
+  <meta name="twitter:description" content="Calculate your exact PayPal fee and net take-home. Current 2026 rates.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "PayPal Fee Calculator",
+        "url": "https://netfee.io/paypal-fee-calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Calculate exact PayPal transaction fees and net take-home using current 2026 rates."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What are PayPal's current transaction fees?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "PayPal charges 3.49% + $0.49 per transaction for standard Checkout payments (PayPal balance and cards via the PayPal button). Advanced Credit/Debit Card processing via PayPal Checkout is 2.99% + $0.49. International cards add 1.5%, and currency conversion adds ~4%. Micropayments (opt-in, for small transactions) are 4.99% + $0.09."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is PayPal more expensive than Stripe and Square?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For standard domestic online payments, yes. PayPal's 3.49% + $0.49 is the highest headline rate among the three major processors. Stripe is 2.9% + $0.30 and Square is 2.9% + $0.30 online (2.6% + $0.10 in-person). That said, PayPal's brand trust drives conversion for some audiences and the micropayments tier can actually be cheaper for transactions under $10."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does PayPal refund fees on refunded transactions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Since 2019, PayPal keeps the fixed fee portion ($0.49) when you refund a transaction — only the percentage-based portion is returned. This is different from Stripe (refunds most fees on modern accounts) and can add up for businesses with high refund rates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When should I use PayPal Micropayments?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Micropayments (4.99% + $0.09) is cheaper than standard (3.49% + $0.49) for transactions below approximately $12. If your average transaction is under $10, opting into Micropayments saves money. You can only have one tier active per PayPal account, so it's all-or-nothing."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google AdSense loader — paste publisher ID after approval
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-mark" aria-hidden="true"></span>
+        <span>netfee.io</span>
+      </a>
+      <div class="nav-links">
+        <a href="/stripe-fee-calculator">Stripe</a>
+        <a href="/square-fee-calculator">Square</a>
+        <a href="/paypal-fee-calculator" class="active">PayPal</a>
+        <a href="/compare">Compare</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>PayPal Fee Calculator</h1>
+        <p class="lede">Enter your transaction amount. See your exact PayPal fee and net take-home — for standard Checkout, international, currency conversion, and Micropayments, using current 2026 rates.</p>
+        <p class="trust">No sign-up. No email. Nothing stored. <strong>Rates current as of April 2026.</strong></p>
+
+        <div class="calc-wrap">
+          <div class="calc-card">
+            <div class="calc-title">Calculate your fee</div>
+
+            <div class="input-group">
+              <label for="amount">Transaction amount</label>
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="amount" value="100.00" min="0.01" step="0.01" inputmode="decimal">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="paymentType">Payment type</label>
+              <select id="paymentType">
+                <option value="standard">Standard Checkout (PayPal or card)</option>
+                <option value="advanced-card">Advanced Credit/Debit Card</option>
+                <option value="international">International card</option>
+                <option value="intl-currency">International + currency conversion</option>
+                <option value="micropayments">Micropayments (opt-in tier)</option>
+              </select>
+            </div>
+
+            <div class="results" aria-live="polite">
+              <div class="result-row">
+                <span>Gross transaction</span>
+                <strong id="r-amount">$100.00</strong>
+              </div>
+              <div class="result-row">
+                <span id="r-fee-label">PayPal fee (3.49% + $0.49)</span>
+                <strong id="r-fee">−$3.98</strong>
+              </div>
+              <div class="result-row total">
+                <span>You receive</span>
+                <strong id="r-net">$96.02</strong>
+              </div>
+            </div>
+
+            <div class="rate-note" id="rate-note">Standard Checkout: 3.49% + $0.49 per successful charge</div>
+          </div>
+
+          <div class="quick-card">
+            <div class="calc-title">Quick reference — standard</div>
+            <table class="quick-table" aria-label="Common transaction amounts and net take-home at standard PayPal rate">
+              <thead>
+                <tr>
+                  <th>Transaction</th>
+                  <th>PayPal fee</th>
+                  <th>You keep</th>
+                </tr>
+              </thead>
+              <tbody id="quick-body"></tbody>
+            </table>
+            <div class="rate-note" style="margin-top:1rem;">
+              Assumes standard Checkout at 3.49% + $0.49 per successful charge.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad slot 1 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-1-hero" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="container">
+        <h2>How PayPal fees actually work</h2>
+        <div class="prose">
+          <p>PayPal's pricing is the most complex of the three major processors. The fee depends on <em>who</em> pays (domestic card, PayPal balance, international card), <em>how</em> they pay (standard Checkout, Advanced Checkout, invoice), and <em>what tier</em> you're on (standard or Micropayments).</p>
+          <p><code>fee = (amount × rate%) + fixed</code></p>
+          <p>A $100 standard domestic charge at <strong>3.49% + $0.49</strong> costs <code>$100 × 0.0349 + $0.49 = $3.98</code>, leaving <strong>$96.02</strong>. Notice that PayPal's rate is meaningfully higher than Stripe's (2.9% + $0.30) or Square's online rate (2.9% + $0.30).</p>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Current PayPal rates (2026)</h3>
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Payment type</th>
+              <th>Rate</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Standard Checkout (PayPal balance + cards via PayPal button)</td>
+              <td class="rate">3.49% + $0.49</td>
+              <td>The default rate for most US merchants since 2021.</td>
+            </tr>
+            <tr>
+              <td>Advanced Credit/Debit Card processing</td>
+              <td class="rate">2.99% + $0.49</td>
+              <td>When cards are processed directly through Checkout without the PayPal button.</td>
+            </tr>
+            <tr>
+              <td>International card</td>
+              <td class="rate">+1.5% (4.99% + $0.49 total)</td>
+              <td>Surcharge added to standard rate for non-US cards.</td>
+            </tr>
+            <tr>
+              <td>Currency conversion</td>
+              <td class="rate">~4% additional</td>
+              <td>Applied when converting to/from your account currency.</td>
+            </tr>
+            <tr>
+              <td>Micropayments (opt-in)</td>
+              <td class="rate">4.99% + $0.09</td>
+              <td>Cheaper than standard for transactions below ~$12. All-or-nothing per account.</td>
+            </tr>
+            <tr>
+              <td>Invoicing (card payment)</td>
+              <td class="rate">3.49% + $0.49</td>
+              <td>Same as standard Checkout.</td>
+            </tr>
+            <tr>
+              <td>Chargeback / dispute fee</td>
+              <td class="rate">$20 per dispute</td>
+              <td>Waived if the transaction is eligible for Seller Protection.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>Heads up:</strong> PayPal's pricing changes frequently and varies by country, business type, and volume. Enterprise pricing is negotiable for merchants processing $100K+/month. Always verify current rates at <a href="https://www.paypal.com/us/webapps/mpp/merchant-fees" rel="nofollow">paypal.com/us/webapps/mpp/merchant-fees</a>.
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Worked examples at common transaction sizes</h2>
+        <p class="prose">PayPal's fixed $0.49 fee is the highest among major processors. On a $5 sale, PayPal keeps 13.3% — more than Stripe (9.0%) or Square (4.6% in-person). For very small transactions, the Micropayments tier is much better.</p>
+
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Gross</th>
+              <th>Standard (3.49% + $0.49)</th>
+              <th>Advanced Card (2.99% + $0.49)</th>
+              <th>Micropayments (4.99% + $0.09)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>$5.00</td><td class="rate">$0.66 (13.24%)</td><td class="rate">$0.64 (12.79%)</td><td class="rate">$0.34 (6.79%)</td></tr>
+            <tr><td>$10.00</td><td class="rate">$0.84 (8.39%)</td><td class="rate">$0.79 (7.89%)</td><td class="rate">$0.59 (5.89%)</td></tr>
+            <tr><td>$25.00</td><td class="rate">$1.36 (5.45%)</td><td class="rate">$1.24 (4.95%)</td><td class="rate">$1.34 (5.34%)</td></tr>
+            <tr><td>$50.00</td><td class="rate">$2.24 (4.47%)</td><td class="rate">$1.99 (3.98%)</td><td class="rate">$2.59 (5.17%)</td></tr>
+            <tr><td>$100.00</td><td class="rate">$3.98 (3.98%)</td><td class="rate">$3.48 (3.48%)</td><td class="rate">$5.08 (5.08%)</td></tr>
+            <tr><td>$500.00</td><td class="rate">$17.94 (3.59%)</td><td class="rate">$15.44 (3.09%)</td><td class="rate">$25.04 (5.01%)</td></tr>
+            <tr><td>$1,000.00</td><td class="rate">$35.39 (3.54%)</td><td class="rate">$30.39 (3.04%)</td><td class="rate">$49.99 (5.00%)</td></tr>
+            <tr><td>$5,000.00</td><td class="rate">$174.99 (3.50%)</td><td class="rate">$149.99 (3.00%)</td><td class="rate">$249.59 (4.99%)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Ad slot 2 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-2-mid" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="container">
+        <h2>PayPal quirks worth knowing</h2>
+        <div class="prose">
+          <ul>
+            <li><strong>Fixed fee isn't refunded.</strong> Since 2019, when you refund a transaction, PayPal keeps the $0.49 fixed fee. Only the percentage is returned. This hurts businesses with high refund rates (software trials, subscription cancellations).</li>
+            <li><strong>Dispute fees are real.</strong> $20 per chargeback, though Seller-Protection-eligible transactions are exempt. If you sell primarily to the US with real ship-to addresses, most disputes are covered.</li>
+            <li><strong>Micropayments is all-or-nothing.</strong> You can't mix Micropayments pricing with standard pricing in the same PayPal account. If your average transaction is under $10, switch; above $12, standard is cheaper.</li>
+            <li><strong>Hold times on new accounts.</strong> New PayPal Business accounts often have 21-day holds on the first $2K–$5K of transactions. Plan for cash flow accordingly.</li>
+            <li><strong>PayPal Payouts is separate.</strong> If you need to pay out to contractors or affiliates, PayPal charges 2% (max $20) per domestic payout, more for international. Different from processing fees.</li>
+            <li><strong>International currency conversion stacks.</strong> A EUR-based customer paying you in USD triggers both the international card surcharge (+1.5%) AND currency conversion (~4%) — total 8.99% + $0.49.</li>
+            <li><strong>Advanced Checkout is a rate cut, not a separate product.</strong> The 2.99% + $0.49 rate applies when PayPal processes cards directly through Checkout (without the PayPal-branded button). Most PayPal Business accounts qualify automatically.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>PayPal vs Stripe vs Square fees</h2>
+        <p class="prose">PayPal has the highest headline rates but unmatched buyer trust in some markets. Stripe is the developer favorite for online and international. Square wins on in-person and chargebacks. Run your numbers through the head-to-head comparison:</p>
+
+        <div class="compare-grid">
+          <a href="/stripe-fee-calculator" class="compare-card">
+            <h3>Stripe</h3>
+            <div class="rate-line">2.9% + $0.30 · US card</div>
+            <span class="link">Calculate Stripe fees →</span>
+          </a>
+          <a href="/square-fee-calculator" class="compare-card">
+            <h3>Square</h3>
+            <div class="rate-line">2.6% + $0.10 · in-person</div>
+            <span class="link">Calculate Square fees →</span>
+          </a>
+          <a href="/paypal-fee-calculator" class="compare-card current">
+            <h3>PayPal</h3>
+            <div class="rate-line">3.49% + $0.49 · Checkout</div>
+            <span class="link">Current page</span>
+          </a>
+          <a href="/compare" class="compare-card">
+            <h3>Head-to-head</h3>
+            <div class="rate-line">Compare all three at your volume</div>
+            <span class="link">Open comparison →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Affiliate CTA block -->
+    <section class="content">
+      <div class="container">
+        <div class="cta-block">
+          <h3>Ready to accept PayPal payments?</h3>
+          <p class="cta-lede">PayPal Business has the largest reach of any processor — especially if your audience skews toward buyers who want to pay with a trusted brand they already use.</p>
+          <div class="cta-buttons">
+            <a href="https://www.paypal.com/business?ref=PLACEHOLDER-PAYPAL" class="cta-btn" rel="sponsored nofollow" target="_blank">Start with PayPal</a>
+            <a href="https://squareup.com/signup?ref=PLACEHOLDER-SQUARE" class="cta-btn secondary" rel="sponsored nofollow" target="_blank">Consider Square</a>
+            <a href="https://www.shopify.com/?ref=PLACEHOLDER-SHOPIFY" class="cta-btn secondary" rel="sponsored nofollow" target="_blank">Consider Shopify</a>
+            <a href="https://stripe.com/pricing" class="cta-btn secondary" rel="nofollow" target="_blank">Stripe pricing (direct)</a>
+          </div>
+          <p class="cta-disclosure">Some links are affiliate links — we may earn a commission at no cost to you. Stripe link is not affiliate. <a href="/terms#affiliate-disclosure">Full disclosure</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+
+        <details class="faq">
+          <summary>What are PayPal's current transaction fees?</summary>
+          <div class="answer">
+            <strong>3.49% + $0.49</strong> for standard Checkout, <strong>2.99% + $0.49</strong> for Advanced Credit/Debit Card via Checkout, +1.5% for international cards, ~4% for currency conversion, and <strong>4.99% + $0.09</strong> for the opt-in Micropayments tier.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Is PayPal more expensive than Stripe and Square?</summary>
+          <div class="answer">
+            For standard domestic online payments, yes — PayPal's 3.49% + $0.49 is the highest among the three major processors. Stripe and Square online are both 2.9% + $0.30. PayPal justifies this with brand trust and Checkout conversion for buyers who prefer logging in rather than entering card details.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Does PayPal refund fees on refunded transactions?</summary>
+          <div class="answer">
+            Not fully. PayPal keeps the fixed fee ($0.49) on refunds; only the percentage-based portion is returned. This differs from Stripe (refunds most fees on modern accounts) and can meaningfully affect businesses with high refund volume.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>When does Micropayments make sense?</summary>
+          <div class="answer">
+            Micropayments (4.99% + $0.09) beats standard (3.49% + $0.49) for transactions under approximately <strong>$12</strong>. If your average transaction is $5–$10 (microtransactions, tips, small digital goods), opt into Micropayments. You can only have one tier per PayPal account.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>What's the deal with holds on new PayPal accounts?</summary>
+          <div class="answer">
+            New PayPal Business accounts often have 21-day rolling holds on initial transactions (typically first $2K–$5K processed). This is to mitigate fraud risk while PayPal builds confidence in the account. Plan cash flow accordingly.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Is this calculator affiliated with PayPal?</summary>
+          <div class="answer">
+            No. netfee.io is independent. We participate in PayPal's partner program via Impact.com — if you click through to PayPal from this page and sign up, we may earn a commission. This doesn't influence the rates we publish.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Ad slot 3 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-3-faq" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>netfee.io</h4>
+        <p class="brand-line"><strong>The honest fee calculator.</strong> No sign-up, no email capture, no stored data — just the math, using current rates.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <a href="/stripe-fee-calculator">Stripe fee calculator</a>
+        <a href="/square-fee-calculator">Square fee calculator</a>
+        <a href="/paypal-fee-calculator">PayPal fee calculator</a>
+        <a href="/compare">Head-to-head comparison</a>
+      </div>
+      <div>
+        <h4>About</h4>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/terms#affiliate-disclosure">Affiliate disclosure</a>
+      </div>
+      <div class="legal">
+        © 2026 netfee.io · Operated by Robot Arms LLC (Colorado) · Rates current as of April 2026 · Always verify with the processor before making business decisions · Not affiliated with Stripe, Square, PayPal, or Shopify · Some external links are affiliate links — <a href="/terms#affiliate-disclosure">full disclosure</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const RATES = {
+      'standard':      { pct: 0.0349, fixed: 0.49, label: 'Standard Checkout (3.49% + $0.49)' },
+      'advanced-card': { pct: 0.0299, fixed: 0.49, label: 'Advanced Credit/Debit Card (2.99% + $0.49)' },
+      'international': { pct: 0.0499, fixed: 0.49, label: 'International card (4.99% + $0.49)' },
+      'intl-currency': { pct: 0.0899, fixed: 0.49, label: 'Intl + currency conversion (8.99% + $0.49)' },
+      'micropayments': { pct: 0.0499, fixed: 0.09, label: 'Micropayments (4.99% + $0.09)' }
+    };
+
+    const NOTE = {
+      'standard':      'Standard Checkout: 3.49% + $0.49. Applies to PayPal balance and card payments via the PayPal button.',
+      'advanced-card': 'Advanced Credit/Debit Card: 2.99% + $0.49. Card processing directly through Checkout (no PayPal button).',
+      'international': 'International card: +1.5% over standard (total 4.99% + $0.49). Applied automatically for non-US cards.',
+      'intl-currency': 'International + currency conversion: roughly 8.99% + $0.49 all-in. The full stack of international surcharges.',
+      'micropayments': 'Micropayments: 4.99% + $0.09. Opt-in tier; beats standard for transactions under ~$12. All-or-nothing per account.'
+    };
+
+    const $ = id => document.getElementById(id);
+    const fmt = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    function calcFee(amount, rateKey) {
+      const r = RATES[rateKey];
+      return amount * r.pct + r.fixed;
+    }
+
+    function updateCalc() {
+      const amt = parseFloat($('amount').value) || 0;
+      const type = $('paymentType').value;
+      const fee = calcFee(amt, type);
+      const net = Math.max(0, amt - fee);
+
+      $('r-amount').textContent = fmt(amt);
+      $('r-fee').textContent = '−' + fmt(fee);
+      $('r-net').textContent = fmt(net);
+      $('r-fee-label').textContent = 'PayPal fee — ' + RATES[type].label.replace(/[()]/g, '').replace(/^[^a-zA-Z]+/, '');
+      $('rate-note').textContent = NOTE[type];
+    }
+    $('amount').addEventListener('input', updateCalc);
+    $('paymentType').addEventListener('change', updateCalc);
+
+    const quickAmounts = [10, 25, 50, 100, 250, 500, 1000, 2500, 5000];
+    const quickBody = $('quick-body');
+    quickAmounts.forEach(amt => {
+      const fee = calcFee(amt, 'standard');
+      const net = amt - fee;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${fmt(amt)}</td><td>${fmt(fee)}</td><td class="net">${fmt(net)}</td>`;
+      quickBody.appendChild(tr);
+    });
+
+    updateCalc();
+  </script>
+
+</body>
+</html>

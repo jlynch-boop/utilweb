@@ -1,0 +1,42 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# Node (if we ever add a build step)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output (future-proofing)
+dist/
+build/
+.wrangler/
+
+# OS / temp
+Thumbs.db
+Desktop.ini
+.cache/

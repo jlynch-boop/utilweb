@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Square Fee Calculator (2026) — In-Person, Online, Keyed | netfee.io</title>
+  <meta name="description" content="Calculate your exact Square transaction fee and net take-home for in-person, online, keyed, or invoice payments. Current 2026 rates.">
+  <link rel="canonical" href="https://netfee.io/square-fee-calculator">
+
+  <meta property="og:title" content="Square Fee Calculator (2026) — Exact Fees in Real Time">
+  <meta property="og:description" content="Calculate your exact Square fee and net take-home for any amount. Current 2026 rates for in-person, online, keyed, and invoice payments.">
+  <meta property="og:url" content="https://netfee.io/square-fee-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="netfee.io">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Square Fee Calculator (2026)">
+  <meta name="twitter:description" content="Calculate your exact Square fee and net take-home. Current 2026 rates.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Square Fee Calculator",
+        "url": "https://netfee.io/square-fee-calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Calculate exact Square transaction fees and net take-home for any amount using current 2026 rates."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What are Square's transaction fees in 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Square charges 2.6% + $0.10 for in-person payments (card dipped, tapped, or swiped via Square Reader or Register), 2.9% + $0.30 for online payments and invoices paid online, 3.5% + $0.15 for manually keyed (card-not-present) entries, and 3.3% + $0.30 for Square Invoices paid by card."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Square charge a chargeback fee?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Square does not charge a per-dispute fee the way Stripe and PayPal do. Square's Seller Protection absorbs eligible disputed transactions up to $250 per month at no cost. For transactions outside that coverage, Square handles the dispute process but won't add a fixed fee on top of the refund."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is the keyed (typed-in) rate higher than the in-person rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Keyed entries are treated as card-not-present by card networks, which carry a higher fraud risk and higher interchange costs. That's why Square (and most processors) charge more for manually typed-in card numbers (3.5% + $0.15) than for dipped, tapped, or swiped cards (2.6% + $0.10)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What's the ACH bank transfer fee on Square?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Square charges 1% for ACH Bank Transfer (invoice payments via bank account) with a minimum of $1 per transaction. For large invoices, this is much cheaper than card processing — a $5,000 ACH invoice costs $50 in fees vs $145.30 on card."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ─────────────────────────────────────────────
+       Google AdSense loader — paste publisher ID after approval
+       ─────────────────────────────────────────────
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-mark" aria-hidden="true"></span>
+        <span>netfee.io</span>
+      </a>
+      <div class="nav-links">
+        <a href="/stripe-fee-calculator">Stripe</a>
+        <a href="/square-fee-calculator" class="active">Square</a>
+        <a href="/paypal-fee-calculator">PayPal</a>
+        <a href="/compare">Compare</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Square Fee Calculator</h1>
+        <p class="lede">Enter your transaction amount. See your exact Square fee and net take-home — for in-person, online, keyed, invoice, or ACH payments, using current 2026 rates.</p>
+        <p class="trust">No sign-up. No email. Nothing stored. <strong>Rates current as of April 2026.</strong></p>
+
+        <div class="calc-wrap">
+          <div class="calc-card">
+            <div class="calc-title">Calculate your fee</div>
+
+            <div class="input-group">
+              <label for="amount">Transaction amount</label>
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="amount" value="100.00" min="0.01" step="0.01" inputmode="decimal">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="paymentType">Payment type</label>
+              <select id="paymentType">
+                <option value="in-person">In-person (Reader / Register)</option>
+                <option value="online">Online / e-commerce</option>
+                <option value="keyed">Manually keyed (card-not-present)</option>
+                <option value="invoice">Square Invoice (paid by card)</option>
+                <option value="ach">ACH Bank Transfer (invoice)</option>
+              </select>
+            </div>
+
+            <div class="results" aria-live="polite">
+              <div class="result-row">
+                <span>Gross transaction</span>
+                <strong id="r-amount">$100.00</strong>
+              </div>
+              <div class="result-row">
+                <span id="r-fee-label">Square fee (2.6% + $0.10)</span>
+                <strong id="r-fee">−$2.70</strong>
+              </div>
+              <div class="result-row total">
+                <span>You receive</span>
+                <strong id="r-net">$97.30</strong>
+              </div>
+            </div>
+
+            <div class="rate-note" id="rate-note">In-person: 2.6% + $0.10 per successful charge</div>
+          </div>
+
+          <div class="quick-card">
+            <div class="calc-title">Quick reference — in-person</div>
+            <table class="quick-table" aria-label="Common transaction amounts and net take-home at in-person rate">
+              <thead>
+                <tr>
+                  <th>Transaction</th>
+                  <th>Square fee</th>
+                  <th>You keep</th>
+                </tr>
+              </thead>
+              <tbody id="quick-body"></tbody>
+            </table>
+            <div class="rate-note" style="margin-top:1rem;">
+              Assumes in-person card-present processing at 2.6% + $0.10.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad slot 1 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-1-hero" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="container">
+        <h2>How Square fees actually work</h2>
+        <div class="prose">
+          <p>Square uses different rates depending on <em>how</em> the card was entered. Physically presenting the card to a Reader or Register is the cheapest; typing it in manually costs the most. The formula is always:</p>
+          <p><code>fee = (amount × rate%) + fixed</code></p>
+          <p>A $100 in-person sale at <strong>2.6% + $0.10</strong> costs <code>$100 × 0.026 + $0.10 = $2.70</code> in fees, leaving <strong>$97.30</strong>. The same sale taken online at <strong>2.9% + $0.30</strong> would cost $3.20.</p>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Current Square rates (2026)</h3>
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Payment type</th>
+              <th>Rate</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>In-person (Reader / Register)</td>
+              <td class="rate">2.6% + $0.10</td>
+              <td>Card dipped, tapped, or swiped. Square's cheapest rate.</td>
+            </tr>
+            <tr>
+              <td>Online / e-commerce (Square Online, checkout)</td>
+              <td class="rate">2.9% + $0.30</td>
+              <td>Card-not-present via online checkout or hosted payment link.</td>
+            </tr>
+            <tr>
+              <td>Manually keyed (typed into POS)</td>
+              <td class="rate">3.5% + $0.15</td>
+              <td>Card-not-present, higher fraud risk, higher rate.</td>
+            </tr>
+            <tr>
+              <td>Square Invoice (paid by card online)</td>
+              <td class="rate">3.3% + $0.30</td>
+              <td>When a customer pays a Square Invoice via card.</td>
+            </tr>
+            <tr>
+              <td>ACH Bank Transfer (invoice)</td>
+              <td class="rate">1% ($1 min)</td>
+              <td>For US bank account payments on invoices.</td>
+            </tr>
+            <tr>
+              <td>Chargeback / dispute fee</td>
+              <td class="rate">$0</td>
+              <td>Square does not add a per-dispute fee. Seller Protection covers up to $250/month.</td>
+            </tr>
+            <tr>
+              <td>Instant Transfer (optional)</td>
+              <td class="rate">1.75%</td>
+              <td>Optional same-day payout to your linked debit card.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>Heads up:</strong> Certain industries, regulated verticals, and custom-pricing accounts can have different rates. Gift card transactions, Cash App Pay, and Afterpay have their own schedules. Always verify at <a href="https://squareup.com/us/en/pricing" rel="nofollow">squareup.com/us/en/pricing</a> before making decisions.
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Worked examples at common transaction sizes</h2>
+        <p class="prose">The fixed $0.10 in-person fee is much gentler on small transactions than Stripe's or PayPal's fixed fees. On a $5 in-person sale, Square keeps 4.6% — vs 9% on Stripe for the same transaction.</p>
+
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Gross</th>
+              <th>In-person (2.6% + $0.10)</th>
+              <th>Online (2.9% + $0.30)</th>
+              <th>Keyed (3.5% + $0.15)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>$5.00</td><td class="rate">$0.23 (4.60%)</td><td class="rate">$0.45 (9.00%)</td><td class="rate">$0.33 (6.50%)</td></tr>
+            <tr><td>$10.00</td><td class="rate">$0.36 (3.60%)</td><td class="rate">$0.59 (5.90%)</td><td class="rate">$0.50 (5.00%)</td></tr>
+            <tr><td>$25.00</td><td class="rate">$0.75 (3.00%)</td><td class="rate">$1.03 (4.12%)</td><td class="rate">$1.03 (4.10%)</td></tr>
+            <tr><td>$50.00</td><td class="rate">$1.40 (2.80%)</td><td class="rate">$1.75 (3.50%)</td><td class="rate">$1.90 (3.80%)</td></tr>
+            <tr><td>$100.00</td><td class="rate">$2.70 (2.70%)</td><td class="rate">$3.20 (3.20%)</td><td class="rate">$3.65 (3.65%)</td></tr>
+            <tr><td>$500.00</td><td class="rate">$13.10 (2.62%)</td><td class="rate">$14.80 (2.96%)</td><td class="rate">$17.65 (3.53%)</td></tr>
+            <tr><td>$1,000.00</td><td class="rate">$26.10 (2.61%)</td><td class="rate">$29.30 (2.93%)</td><td class="rate">$35.15 (3.52%)</td></tr>
+            <tr><td>$5,000.00</td><td class="rate">$130.10 (2.60%)</td><td class="rate">$145.30 (2.91%)</td><td class="rate">$175.15 (3.50%)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Ad slot 2 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-2-mid" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="container">
+        <h2>Square's unique features worth knowing</h2>
+        <div class="prose">
+          <ul>
+            <li><strong>No chargeback fees.</strong> Unlike Stripe ($15/dispute) and PayPal ($20/dispute), Square doesn't charge per-dispute fees. Their Seller Protection policy absorbs eligible disputed transactions up to $250 per month. For high-dispute businesses, this alone can swing the math.</li>
+            <li><strong>Hardware costs.</strong> In-person processing requires Square hardware: a free magstripe Reader, a $49 contactless+chip Reader, a $299 Stand, or a $1,099 Register. Hardware is a one-time cost but separate from processing fees.</li>
+            <li><strong>No monthly fees on the base plan.</strong> Square Free has no monthly subscription — you pay only per-transaction. Square Plus ($29/mo) and Premium add features like advanced inventory, loyalty, and team management.</li>
+            <li><strong>Instant Transfer isn't standard payout.</strong> Standard next-business-day deposits are free. Instant Transfer (same-day to a debit card) is 1.75% on top.</li>
+            <li><strong>Invoice split:</strong> 3.3% + $0.30 applies only when the invoice is paid via <em>card</em>. If paid via ACH bank transfer, it's the 1% ACH rate — much cheaper for large B2B invoices.</li>
+            <li><strong>Cash App Pay.</strong> Square owns Cash App. Cash App Pay on Square runs at 2.9% + $0.30 (online) or 2.6% + $0.10 (in-person) — same as card rates, usually.</li>
+            <li><strong>International limitations.</strong> Square doesn't process international cards in the US the way Stripe does. Cross-border e-commerce is a weak spot.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Square vs Stripe vs PayPal fees</h2>
+        <p class="prose">Square wins on in-person (2.6% + $0.10 is the lowest headline rate among the three) and on dispute handling (no per-chargeback fees). Stripe wins on online flexibility and international processing. PayPal wins on buyer trust but has the highest headline rates.</p>
+
+        <div class="compare-grid">
+          <a href="/stripe-fee-calculator" class="compare-card">
+            <h3>Stripe</h3>
+            <div class="rate-line">2.9% + $0.30 · US card</div>
+            <span class="link">Calculate Stripe fees →</span>
+          </a>
+          <a href="/square-fee-calculator" class="compare-card current">
+            <h3>Square</h3>
+            <div class="rate-line">2.6% + $0.10 · in-person</div>
+            <span class="link">Current page</span>
+          </a>
+          <a href="/paypal-fee-calculator" class="compare-card">
+            <h3>PayPal</h3>
+            <div class="rate-line">3.49% + $0.49 · Checkout</div>
+            <span class="link">Calculate PayPal fees →</span>
+          </a>
+          <a href="/compare" class="compare-card">
+            <h3>Head-to-head</h3>
+            <div class="rate-line">Compare all three at your volume</div>
+            <span class="link">Open comparison →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Affiliate CTA block -->
+    <section class="content">
+      <div class="container">
+        <div class="cta-block">
+          <h3>Ready to accept payments with Square?</h3>
+          <p class="cta-lede">If the fee math above works for your business, Square is one of the fastest ways to open a merchant account — especially for in-person and invoicing.</p>
+          <div class="cta-buttons">
+            <a href="https://squareup.com/signup?ref=PLACEHOLDER-SQUARE" class="cta-btn" rel="sponsored nofollow" target="_blank">Start with Square</a>
+            <a href="https://www.shopify.com/?ref=PLACEHOLDER-SHOPIFY" class="cta-btn secondary" rel="sponsored nofollow" target="_blank">Consider Shopify</a>
+            <a href="https://www.paypal.com/business?ref=PLACEHOLDER-PAYPAL" class="cta-btn secondary" rel="sponsored nofollow" target="_blank">Consider PayPal</a>
+            <a href="https://stripe.com/pricing" class="cta-btn secondary" rel="nofollow" target="_blank">Stripe pricing (direct)</a>
+          </div>
+          <p class="cta-disclosure">Some links are affiliate links — we may earn a commission at no cost to you. Stripe link is not affiliate. <a href="/terms#affiliate-disclosure">Full disclosure</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+
+        <details class="faq">
+          <summary>What are Square's transaction fees in 2026?</summary>
+          <div class="answer">
+            Square charges <strong>2.6% + $0.10</strong> for in-person, <strong>2.9% + $0.30</strong> for online and e-commerce, <strong>3.5% + $0.15</strong> for manually keyed (card-not-present typed entries), and <strong>3.3% + $0.30</strong> for Square Invoices paid by card.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Does Square charge a chargeback fee?</summary>
+          <div class="answer">
+            No per-dispute fee. Square's Seller Protection absorbs eligible disputes up to $250/month. This is a material difference from Stripe ($15/dispute) and PayPal ($20/dispute) for high-volume merchants.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Why is the keyed-in rate higher?</summary>
+          <div class="answer">
+            Manually typed card entries are treated as card-not-present by the card networks, which carry higher interchange and fraud costs. That's why keyed entries cost 3.5% + $0.15 vs 2.6% + $0.10 for dipped/tapped cards.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>What's the ACH rate on Square Invoices?</summary>
+          <div class="answer">
+            <strong>1% per transaction (min $1)</strong>. On a $5,000 B2B invoice, that's $50 via ACH vs $145.30 if paid by card. For large-ticket invoices, always prefer ACH if your customer will authorize it.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Does Square process international cards?</summary>
+          <div class="answer">
+            Limited support. Square is primarily a domestic US/UK/CA/AU/JP processor — cross-border e-commerce is better served by Stripe. If a large portion of your customers pay with non-US cards, compare Stripe's international + currency conversion rates in our <a href="/stripe-fee-calculator">Stripe calculator</a>.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Is this calculator affiliated with Square?</summary>
+          <div class="answer">
+            No. netfee.io is independent. We participate in Square's affiliate program via Impact.com — if you click through to Square from this page and sign up, we may earn a commission. This doesn't influence the rates we publish.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Ad slot 3 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-3-faq" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>netfee.io</h4>
+        <p class="brand-line"><strong>The honest fee calculator.</strong> No sign-up, no email capture, no stored data — just the math, using current rates.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <a href="/stripe-fee-calculator">Stripe fee calculator</a>
+        <a href="/square-fee-calculator">Square fee calculator</a>
+        <a href="/paypal-fee-calculator">PayPal fee calculator</a>
+        <a href="/compare">Head-to-head comparison</a>
+      </div>
+      <div>
+        <h4>About</h4>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/terms#affiliate-disclosure">Affiliate disclosure</a>
+      </div>
+      <div class="legal">
+        © 2026 netfee.io · Operated by Robot Arms LLC (Colorado) · Rates current as of April 2026 · Always verify with the processor before making business decisions · Not affiliated with Stripe, Square, PayPal, or Shopify · Some external links are affiliate links — <a href="/terms#affiliate-disclosure">full disclosure</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const RATES = {
+      'in-person': { pct: 0.026, fixed: 0.10, cap: null, label: 'In-person (2.6% + $0.10)' },
+      'online':    { pct: 0.029, fixed: 0.30, cap: null, label: 'Online (2.9% + $0.30)' },
+      'keyed':     { pct: 0.035, fixed: 0.15, cap: null, label: 'Keyed (3.5% + $0.15)' },
+      'invoice':   { pct: 0.033, fixed: 0.30, cap: null, label: 'Invoice paid by card (3.3% + $0.30)' },
+      'ach':       { pct: 0.01,  fixed: 0.00, cap: null, min: 1.00, label: 'ACH Bank Transfer (1%, $1 min)' }
+    };
+
+    const NOTE = {
+      'in-person': 'In-person: 2.6% + $0.10 per successful charge. Requires Square hardware (Reader, Stand, or Register).',
+      'online':    'Online / e-commerce: 2.9% + $0.30. Square Online checkout, hosted payment pages.',
+      'keyed':     'Keyed: 3.5% + $0.15. Card-not-present, higher fraud risk, higher rate.',
+      'invoice':   'Square Invoice paid by card: 3.3% + $0.30. If paid by ACH, it\'s the ACH rate instead.',
+      'ach':       'ACH: 1% per transaction, $1 minimum. Great for large B2B invoices.'
+    };
+
+    const $ = id => document.getElementById(id);
+    const fmt = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    function calcFee(amount, rateKey) {
+      const r = RATES[rateKey];
+      let fee = amount * r.pct + r.fixed;
+      if (r.cap !== null) fee = Math.min(fee, r.cap);
+      if (r.min !== undefined) fee = Math.max(fee, r.min);
+      return fee;
+    }
+
+    function updateCalc() {
+      const amt = parseFloat($('amount').value) || 0;
+      const type = $('paymentType').value;
+      const fee = calcFee(amt, type);
+      const net = Math.max(0, amt - fee);
+
+      $('r-amount').textContent = fmt(amt);
+      $('r-fee').textContent = '−' + fmt(fee);
+      $('r-net').textContent = fmt(net);
+      $('r-fee-label').textContent = 'Square fee — ' + RATES[type].label.replace(/[()]/g, '').replace(/^[^a-zA-Z]+/, '');
+      $('rate-note').textContent = NOTE[type];
+    }
+    $('amount').addEventListener('input', updateCalc);
+    $('paymentType').addEventListener('change', updateCalc);
+
+    const quickAmounts = [10, 25, 50, 100, 250, 500, 1000, 2500, 5000];
+    const quickBody = $('quick-body');
+    quickAmounts.forEach(amt => {
+      const fee = calcFee(amt, 'in-person');
+      const net = amt - fee;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${fmt(amt)}</td><td>${fmt(fee)}</td><td class="net">${fmt(net)}</td>`;
+      quickBody.appendChild(tr);
+    });
+
+    updateCalc();
+  </script>
+
+</body>
+</html>

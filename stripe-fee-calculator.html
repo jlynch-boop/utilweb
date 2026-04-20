@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stripe Fee Calculator (2026) — Exact Fees in Real Time | netfee.io</title>
+  <meta name="description" content="Calculate your exact Stripe transaction fee and net take-home for any amount. Current 2026 rates for US cards, international cards, ACH, and Link. No sign-up.">
+  <link rel="canonical" href="https://netfee.io/stripe-fee-calculator">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Stripe Fee Calculator (2026) — Exact Fees in Real Time">
+  <meta property="og:description" content="Calculate your exact Stripe transaction fee and net take-home for any amount. Current 2026 rates. No sign-up.">
+  <meta property="og:url" content="https://netfee.io/stripe-fee-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="netfee.io">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stripe Fee Calculator (2026)">
+  <meta name="twitter:description" content="Calculate your exact Stripe fee and net take-home for any amount. Current 2026 rates.">
+
+  <!-- Schema.org: SoftwareApplication + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Stripe Fee Calculator",
+        "url": "https://netfee.io/stripe-fee-calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Calculate exact Stripe transaction fees and net take-home for any amount using current 2026 rates."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What are Stripe's transaction fees in 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Stripe charges 2.9% + $0.30 per successful domestic card transaction in the US. International cards add 1.5% (for a total of 4.4% + $0.30) and currency conversion adds another 1%. ACH Direct Debit is 0.8% capped at $5 per transaction. These rates apply to standard accounts; Stripe Connect, Terminal, and enterprise deals can differ."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Stripe charge different fees for Amex vs. Visa/Mastercard?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Stripe unified its card processing rate years ago — US Amex, Visa, and Mastercard all process at 2.9% + $0.30. This is different from PayPal and Square, which have historically had separate Amex rates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are Stripe's fees deducted from the transaction automatically?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Stripe deducts the fee from the gross transaction amount before depositing the net to your bank account. You don't pay a separate monthly bill — fees come out of each transaction. This means the amount you see in Stripe's dashboard is your net, not the gross."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if a customer disputes a charge?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Stripe charges a $15 dispute fee per disputed charge, in addition to refunding the transaction to the customer. If you win the dispute, the $15 is not refunded. Chargebacks are a real cost to plan for, especially for high-ticket or international businesses."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I negotiate lower Stripe fees?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Stripe offers custom pricing for businesses with large volume, typically starting at $80,000+/month in processing. Below that, the published 2.9% + $0.30 is what you'll pay. Stripe Connect platforms can set their own platform fees on top, but that's different from negotiating the underlying rate."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ─────────────────────────────────────────────
+       Google AdSense loader — paste publisher ID after approval
+       Uncomment the script tag below and replace ca-pub-XXXXXXXXXXXXXXXX
+       with your AdSense publisher ID from adsense.google.com.
+       ─────────────────────────────────────────────
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-mark" aria-hidden="true"></span>
+        <span>netfee.io</span>
+      </a>
+      <div class="nav-links">
+        <a href="/stripe-fee-calculator" class="active">Stripe</a>
+        <a href="/square-fee-calculator">Square</a>
+        <a href="/paypal-fee-calculator">PayPal</a>
+        <a href="/compare">Compare</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Stripe Fee Calculator</h1>
+        <p class="lede">Enter your transaction amount. See your exact Stripe fee and net take-home in real time — using current 2026 rates for US cards, international cards, ACH, and Link.</p>
+        <p class="trust">No sign-up. No email. Nothing stored. <strong>Rates current as of April 2026.</strong></p>
+
+        <div class="calc-wrap">
+          <div class="calc-card">
+            <div class="calc-title">Calculate your fee</div>
+
+            <div class="input-group">
+              <label for="amount">Transaction amount</label>
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="amount" value="100.00" min="0.01" step="0.01" inputmode="decimal">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="paymentType">Payment type</label>
+              <select id="paymentType">
+                <option value="us-card">US card (debit or credit)</option>
+                <option value="intl-card">International card</option>
+                <option value="intl-currency">International card + currency conversion</option>
+                <option value="ach">ACH Direct Debit</option>
+                <option value="link">Link (Stripe bank payment)</option>
+              </select>
+            </div>
+
+            <div class="results" aria-live="polite">
+              <div class="result-row">
+                <span>Gross transaction</span>
+                <strong id="r-amount">$100.00</strong>
+              </div>
+              <div class="result-row">
+                <span id="r-fee-label">Stripe fee (2.9% + $0.30)</span>
+                <strong id="r-fee">−$3.20</strong>
+              </div>
+              <div class="result-row total">
+                <span>You receive</span>
+                <strong id="r-net">$96.80</strong>
+              </div>
+            </div>
+
+            <div class="rate-note" id="rate-note">US card: 2.9% + $0.30 per successful charge</div>
+          </div>
+
+          <div class="quick-card">
+            <div class="calc-title">Quick reference — US card</div>
+            <table class="quick-table" aria-label="Common transaction amounts and net take-home">
+              <thead>
+                <tr>
+                  <th>Transaction</th>
+                  <th>Stripe fee</th>
+                  <th>You keep</th>
+                </tr>
+              </thead>
+              <tbody id="quick-body"></tbody>
+            </table>
+            <div class="rate-note" style="margin-top:1rem;">
+              Assumes standard US card processing at 2.9% + $0.30 per successful charge.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Ad slot 1: below hero calculator ── -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-1-hero" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        -->
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="container">
+        <h2>How Stripe fees actually work</h2>
+        <div class="prose">
+          <p>Stripe charges a percentage of the transaction plus a flat per-transaction fee. The formula is simple:</p>
+          <p><code>fee = (amount × rate%) + fixed</code></p>
+          <p>For a standard US card charge at <strong>2.9% + $0.30</strong>, a $100 transaction costs you <code>$100 × 0.029 + $0.30 = $3.20</code> in fees, leaving <strong>$96.80</strong> deposited to your bank.</p>
+          <p>Stripe deducts the fee from each transaction before payout — you don't receive a monthly bill. The dashboard shows your <em>net</em>, not your gross.</p>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Current Stripe rates (2026)</h3>
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Payment type</th>
+              <th>Rate</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>US card (Visa, Mastercard, Amex, Discover)</td>
+              <td class="rate">2.9% + $0.30</td>
+              <td>Standard accounts. Same rate across all US cards.</td>
+            </tr>
+            <tr>
+              <td>International card</td>
+              <td class="rate">4.4% + $0.30</td>
+              <td>Adds 1.5% for non-US cards.</td>
+            </tr>
+            <tr>
+              <td>Currency conversion</td>
+              <td class="rate">+1%</td>
+              <td>Added on top of international card rate. Total: 5.4% + $0.30.</td>
+            </tr>
+            <tr>
+              <td>ACH Direct Debit</td>
+              <td class="rate">0.8%, capped at $5</td>
+              <td>For US bank account debits. Much cheaper for large transactions.</td>
+            </tr>
+            <tr>
+              <td>Link (instant bank payment)</td>
+              <td class="rate">0.8%, capped at $5</td>
+              <td>Stripe's stored payment method, similar pricing to ACH.</td>
+            </tr>
+            <tr>
+              <td>Dispute fee</td>
+              <td class="rate">$15 per dispute</td>
+              <td>Charged per chargeback. Not refunded if you win.</td>
+            </tr>
+            <tr>
+              <td>Instant Payout</td>
+              <td class="rate">1% (min $0.50)</td>
+              <td>Optional faster-than-standard payout to your bank.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>Heads up:</strong> These rates apply to standard Stripe accounts. Stripe Connect platforms, Terminal in-person payments, enterprise deals, and certain regulated industries can have different pricing. Always verify current rates at <a href="https://stripe.com/pricing" rel="nofollow">stripe.com/pricing</a> before making decisions.
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Worked examples at common transaction sizes</h2>
+        <p class="prose">The fixed $0.30 hurts most on small transactions. On a $5 sale, the effective rate is 8.9% — three times the headline rate. On a $1,000 sale, it's 2.93%.</p>
+
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Gross</th>
+              <th>Stripe fee (US card)</th>
+              <th>You keep</th>
+              <th>Effective rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>$5.00</td><td class="rate">$0.45</td><td class="rate">$4.55</td><td>9.00%</td></tr>
+            <tr><td>$10.00</td><td class="rate">$0.59</td><td class="rate">$9.41</td><td>5.90%</td></tr>
+            <tr><td>$25.00</td><td class="rate">$1.03</td><td class="rate">$23.97</td><td>4.12%</td></tr>
+            <tr><td>$50.00</td><td class="rate">$1.75</td><td class="rate">$48.25</td><td>3.50%</td></tr>
+            <tr><td>$100.00</td><td class="rate">$3.20</td><td class="rate">$96.80</td><td>3.20%</td></tr>
+            <tr><td>$500.00</td><td class="rate">$14.80</td><td class="rate">$485.20</td><td>2.96%</td></tr>
+            <tr><td>$1,000.00</td><td class="rate">$29.30</td><td class="rate">$970.70</td><td>2.93%</td></tr>
+            <tr><td>$5,000.00</td><td class="rate">$145.30</td><td class="rate">$4,854.70</td><td>2.91%</td></tr>
+            <tr><td>$10,000.00</td><td class="rate">$290.30</td><td class="rate">$9,709.70</td><td>2.90%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── Ad slot 2: mid-content, after worked examples ── -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-2-mid" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        -->
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="container">
+        <h2>Hidden Stripe fees most guides miss</h2>
+        <div class="prose">
+          <p>The headline 2.9% + $0.30 is honest — but there are several situations where the real cost lands higher. Here's what most guides skip:</p>
+          <ul>
+            <li><strong>Currency conversion stacks.</strong> If a French customer pays you in EUR, you pay the international-card surcharge (1.5%) <em>and</em> the currency conversion fee (1%) — 5.4% + $0.30 on top. This matters for cross-border SaaS and DTC.</li>
+            <li><strong>Refunded transactions don't return the fixed fee (for older accounts).</strong> Stripe has generally moved to refunding full fees on most accounts now, but behavior varies by account age and region — check your Stripe dashboard settings.</li>
+            <li><strong>Disputes cost $15 per case.</strong> Even if you win the dispute, the $15 is not returned. For high-dispute businesses (subscriptions, digital goods), this adds up fast.</li>
+            <li><strong>Stripe Connect platform fees layer on top.</strong> If you're using Connect, your platform can charge its own cut <em>in addition to</em> Stripe's processing fees. Always read the platform's terms.</li>
+            <li><strong>Radar for Fraud Teams is $0.05/screened charge</strong> (on top of processing). Standard Radar is free and included — the paid tier with custom rules costs extra.</li>
+            <li><strong>Terminal (in-person) is 2.7% + $0.05.</strong> Different from online — generally cheaper percentage but you pay for hardware.</li>
+            <li><strong>Invoicing, Billing, Identity, Tax, and Climate</strong> all have their own fees layered on top of processing. If you use these, budget separately.</li>
+          </ul>
+          <p>The calculator above handles the main card + ACH + Link cases. For Connect, Terminal, or enterprise pricing, Stripe's <a href="https://stripe.com/pricing" rel="nofollow">current pricing page</a> is the source of truth.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Stripe vs Square vs PayPal fees</h2>
+        <p class="prose">Stripe is not cheapest for every case. Square is cheaper for small in-person transactions; PayPal is sometimes better for certain international flows; some processors beat all three on volume pricing. Run the math for your specific situation:</p>
+
+        <div class="compare-grid">
+          <a href="/stripe-fee-calculator" class="compare-card" style="border-color: var(--accent);">
+            <h3>Stripe</h3>
+            <div class="rate-line">2.9% + $0.30 · US card</div>
+            <a>Current page →</a>
+          </a>
+          <a href="/square-fee-calculator" class="compare-card soon" aria-disabled="true">
+            <h3>Square</h3>
+            <div class="rate-line">2.6% + $0.10 · in-person</div>
+            <a>Calculator coming soon</a>
+          </a>
+          <a href="/paypal-fee-calculator" class="compare-card soon" aria-disabled="true">
+            <h3>PayPal</h3>
+            <div class="rate-line">3.49% + $0.49 · online</div>
+            <a>Calculator coming soon</a>
+          </a>
+          <a href="/compare" class="compare-card soon" aria-disabled="true">
+            <h3>Head-to-head</h3>
+            <div class="rate-line">Compare all three at your volume</div>
+            <a>Comparison coming soon</a>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Affiliate CTA block ── -->
+    <section class="content">
+      <div class="container">
+        <div class="cta-block">
+          <h3>Ready to accept payments?</h3>
+          <p class="cta-lede">If you're evaluating processors based on the fee math above, these are the fastest ways to open an account. We don't show rates we don't trust — these are the same numbers you see on the processors' own sites.</p>
+          <div class="cta-buttons">
+            <!-- Replace PLACEHOLDER with tracked affiliate URL after program approval -->
+            <a href="https://www.shopify.com/?ref=PLACEHOLDER-SHOPIFY" class="cta-btn" rel="sponsored nofollow" target="_blank">Start with Shopify</a>
+            <a href="https://squareup.com/signup?ref=PLACEHOLDER-SQUARE" class="cta-btn" rel="sponsored nofollow" target="_blank">Start with Square</a>
+            <a href="https://www.paypal.com/business?ref=PLACEHOLDER-PAYPAL" class="cta-btn" rel="sponsored nofollow" target="_blank">Start with PayPal</a>
+            <a href="https://stripe.com/pricing" class="cta-btn secondary" rel="nofollow" target="_blank">Stripe pricing (direct)</a>
+          </div>
+          <p class="cta-disclosure">Some links are affiliate links — we may earn a commission at no cost to you. Stripe link is not affiliate. <a href="/terms#affiliate-disclosure">Full disclosure</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+
+        <details class="faq">
+          <summary>What are Stripe's transaction fees in 2026?</summary>
+          <div class="answer">
+            Stripe charges <strong>2.9% + $0.30</strong> per successful domestic card transaction in the US. International cards add 1.5% (total 4.4% + $0.30) and currency conversion adds another 1%. ACH Direct Debit is 0.8% capped at $5. These rates apply to standard Stripe accounts; Stripe Connect, Terminal, and enterprise deals can differ.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Does Stripe charge different fees for Amex vs. Visa/Mastercard?</summary>
+          <div class="answer">
+            No. Stripe unified its card processing rate years ago — US Amex, Visa, Mastercard, and Discover all process at 2.9% + $0.30. This is different from <a href="/paypal-fee-calculator">PayPal</a> and some <a href="/square-fee-calculator">Square</a> configurations, which have historically varied by card brand.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Are Stripe's fees deducted from the transaction automatically?</summary>
+          <div class="answer">
+            Yes. Stripe deducts the fee from the gross transaction amount before depositing the net to your bank. You don't get a separate monthly bill — fees come out of each transaction. The "Available balance" in your Stripe dashboard is your <em>net</em>, not your gross.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>What happens if a customer disputes a charge?</summary>
+          <div class="answer">
+            Stripe charges a <strong>$15 dispute fee</strong> per disputed charge, in addition to refunding the transaction to the customer. If you win the dispute, the $15 is not refunded. For high-ticket or cross-border businesses, chargebacks are a material cost to plan for.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Can I negotiate lower Stripe fees?</summary>
+          <div class="answer">
+            Stripe offers custom pricing for businesses at roughly $80,000+/month in processing volume. Below that, the published 2.9% + $0.30 is what you'll pay. Stripe Connect platforms can set their own platform fees on top, but that's different from negotiating the underlying processing rate.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>How is ACH cheaper than card?</summary>
+          <div class="answer">
+            ACH Direct Debit is 0.8% capped at $5. On a $500 sale: $14.80 via card vs $4.00 via ACH — an 11-dollar savings. The trade-off: ACH takes 3–5 business days to settle, and customers need to provide bank account details instead of a card. For B2B invoicing and large one-off payments, ACH is usually the right call.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Is this calculator affiliated with Stripe?</summary>
+          <div class="answer">
+            No. netfee.io is independent. We built this calculator because the headline rates on processor pricing pages rarely match what business owners actually pay once currency conversion, disputes, and other line items are factored in. We don't store any data you enter.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ── Ad slot 3: post-FAQ ── -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-3-faq" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>netfee.io</h4>
+        <p class="brand-line"><strong>The honest fee calculator.</strong> No sign-up, no email capture, no stored data — just the math, using current rates.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <a href="/stripe-fee-calculator">Stripe fee calculator</a>
+        <a href="/square-fee-calculator">Square fee calculator</a>
+        <a href="/paypal-fee-calculator">PayPal fee calculator</a>
+        <a href="/compare">Head-to-head comparison</a>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <a href="/guides/how-stripe-fees-work">How Stripe fees work</a>
+        <a href="/guides/hidden-processor-fees">Hidden processor fees</a>
+        <a href="/guides/ach-vs-card">ACH vs card: which is cheaper?</a>
+      </div>
+      <div class="legal">
+        © 2026 netfee.io · Operated by Robot Arms LLC (Colorado) · Rates current as of April 2026 · Always verify with the processor before making business decisions · Not affiliated with Stripe, Square, PayPal, or Shopify · Some external links are affiliate links — <a href="/terms#affiliate-disclosure">full disclosure</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── Rate constants (2026, US) ───
+    const RATES = {
+      'us-card':       { pct: 0.029, fixed: 0.30, cap: null, label: 'US card (2.9% + $0.30)' },
+      'intl-card':     { pct: 0.044, fixed: 0.30, cap: null, label: 'International card (4.4% + $0.30)' },
+      'intl-currency': { pct: 0.054, fixed: 0.30, cap: null, label: 'Intl card + currency conversion (5.4% + $0.30)' },
+      'ach':           { pct: 0.008, fixed: 0.00, cap: 5.00, label: 'ACH Direct Debit (0.8%, capped at $5)' },
+      'link':          { pct: 0.008, fixed: 0.00, cap: 5.00, label: 'Link bank payment (0.8%, capped at $5)' }
+    };
+
+    const NOTE = {
+      'us-card':       'US card: 2.9% + $0.30 per successful charge',
+      'intl-card':     'International card: adds 1.5% over US rate (total 4.4% + $0.30)',
+      'intl-currency': 'International card + currency conversion: adds 1% over intl rate (total 5.4% + $0.30)',
+      'ach':           'ACH: 0.8% with a $5 cap. Settlement in 3–5 business days.',
+      'link':          'Link: Stripe stored-bank payment, 0.8% capped at $5. Similar economics to ACH.'
+    };
+
+    // ─── Helpers ───
+    const $ = id => document.getElementById(id);
+    const fmt = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    function calcFee(amount, rateKey) {
+      const r = RATES[rateKey];
+      let fee = amount * r.pct + r.fixed;
+      if (r.cap !== null) fee = Math.min(fee, r.cap);
+      return fee;
+    }
+
+    // ─── Live calculator ───
+    function updateCalc() {
+      const amt = parseFloat($('amount').value) || 0;
+      const type = $('paymentType').value;
+      const fee = calcFee(amt, type);
+      const net = Math.max(0, amt - fee);
+
+      $('r-amount').textContent = fmt(amt);
+      $('r-fee').textContent = '−' + fmt(fee);
+      $('r-net').textContent = fmt(net);
+      $('r-fee-label').textContent = 'Stripe fee — ' + RATES[type].label.replace(/^[^(]+/, '').replace(/[()]/g, '');
+      $('rate-note').textContent = NOTE[type];
+    }
+    $('amount').addEventListener('input', updateCalc);
+    $('paymentType').addEventListener('change', updateCalc);
+
+    // ─── Quick reference table (US card) ───
+    const quickAmounts = [10, 25, 50, 100, 250, 500, 1000, 2500, 5000];
+    const quickBody = $('quick-body');
+    quickAmounts.forEach(amt => {
+      const fee = calcFee(amt, 'us-card');
+      const net = amt - fee;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${fmt(amt)}</td><td>${fmt(fee)}</td><td class="net">${fmt(net)}</td>`;
+      quickBody.appendChild(tr);
+    });
+
+    updateCalc();
+  </script>
+
+</body>
+</html>

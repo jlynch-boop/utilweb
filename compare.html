@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stripe vs Square vs PayPal: Fees Compared (2026) | netfee.io</title>
+  <meta name="description" content="Compare Stripe, Square, and PayPal transaction fees side-by-side for any amount. Current 2026 rates, worked scenarios, and a verdict for each use case.">
+  <link rel="canonical" href="https://netfee.io/compare">
+
+  <meta property="og:title" content="Stripe vs Square vs PayPal: Fees Compared (2026)">
+  <meta property="og:description" content="Compare payment processor fees side-by-side. Current 2026 rates, worked scenarios, and a verdict for each use case.">
+  <meta property="og:url" content="https://netfee.io/compare">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="netfee.io">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stripe vs Square vs PayPal: Fees Compared (2026)">
+  <meta name="twitter:description" content="Side-by-side payment processor fee comparison.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Payment Processor Fee Comparison",
+    "url": "https://netfee.io/compare",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Side-by-side comparison of Stripe, Square, and PayPal transaction fees using current 2026 rates."
+  }
+  </script>
+
+  <!-- Google AdSense loader — paste publisher ID after approval
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-mark" aria-hidden="true"></span>
+        <span>netfee.io</span>
+      </a>
+      <div class="nav-links">
+        <a href="/stripe-fee-calculator">Stripe</a>
+        <a href="/square-fee-calculator">Square</a>
+        <a href="/paypal-fee-calculator">PayPal</a>
+        <a href="/compare" class="active">Compare</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Stripe vs Square vs PayPal: Fees Compared</h1>
+        <p class="lede">Run the same transaction through all three processors at once. See the fee, the net take-home, and who wins — instantly, with current 2026 rates.</p>
+        <p class="trust">Rates verified <strong>April 2026</strong>. We keep the numbers current.</p>
+
+        <div class="calc-card" style="margin-top: 2rem;">
+          <div class="calc-title">Enter a transaction and scenario</div>
+
+          <div style="display: grid; gap: 1.25rem; grid-template-columns: 1fr; margin-bottom: 1rem;">
+            <div>
+              <div class="input-group">
+                <label for="amount">Transaction amount</label>
+                <div class="input-wrap">
+                  <span class="prefix">$</span>
+                  <input type="number" id="amount" value="100.00" min="0.01" step="0.01" inputmode="decimal">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="input-group">
+                <label for="scenario">Scenario</label>
+                <select id="scenario">
+                  <option value="online-domestic">Online, domestic US card</option>
+                  <option value="in-person">In-person (swipe, dip, or tap)</option>
+                  <option value="keyed">Manually keyed (card not present, typed)</option>
+                  <option value="invoice">Invoice paid by card</option>
+                  <option value="international">International card (domestic processor, foreign buyer)</option>
+                  <option value="micro">Micropayment ($1–$10 range)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="compare-results" id="compare-results" aria-live="polite">
+            <!-- populated by JS -->
+          </div>
+          <div class="rate-note" id="scenario-note" style="margin-top: 1rem;">
+            Online domestic: cards entered online via checkout, processed as standard US card-not-present.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad slot 1 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-1-hero" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="container">
+        <h2>When each processor wins</h2>
+        <div class="prose">
+          <p>Headline rates don't tell the full story. Each processor has scenarios where it's meaningfully cheaper or more convenient:</p>
+        </div>
+
+        <table class="rates-table" style="margin-top: 1rem;">
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Winner</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>In-person retail / restaurant</td>
+              <td class="winner"><strong>Square</strong></td>
+              <td>2.6% + $0.10 is the cheapest in-person rate. No monthly fee on the base plan. Hardware ecosystem is mature.</td>
+            </tr>
+            <tr>
+              <td>Online B2C e-commerce, domestic only</td>
+              <td class="winner"><strong>Stripe</strong> or <strong>Square</strong> (tie)</td>
+              <td>Both at 2.9% + $0.30. Stripe for developer flexibility; Square for zero-effort storefront (Square Online).</td>
+            </tr>
+            <tr>
+              <td>International / cross-border e-commerce</td>
+              <td class="winner"><strong>Stripe</strong></td>
+              <td>Stripe supports 135+ currencies, transparent international pricing. Square and PayPal have weaker international handling.</td>
+            </tr>
+            <tr>
+              <td>B2B invoicing with large amounts</td>
+              <td class="winner"><strong>Square</strong> (ACH)</td>
+              <td>Square ACH at 1% with $1 min beats both Stripe ACH ($5 cap) and PayPal for invoices $500+. For card-paid invoices, Square 3.3% wins.</td>
+            </tr>
+            <tr>
+              <td>Microtransactions (&lt; $10)</td>
+              <td class="winner"><strong>PayPal Micropayments</strong></td>
+              <td>4.99% + $0.09 is the only tier with a sub-$0.30 fixed fee. Beats the other two for small sums.</td>
+            </tr>
+            <tr>
+              <td>High dispute / chargeback risk</td>
+              <td class="winner"><strong>Square</strong></td>
+              <td>No per-dispute fee. Seller Protection absorbs up to $250/month. Stripe charges $15/dispute, PayPal $20.</td>
+            </tr>
+            <tr>
+              <td>Developer platform, marketplace, SaaS</td>
+              <td class="winner"><strong>Stripe</strong></td>
+              <td>Stripe Connect is the only serious platform-ready product. Square and PayPal don't compete here.</td>
+            </tr>
+            <tr>
+              <td>Trust-sensitive international buyers</td>
+              <td class="winner"><strong>PayPal</strong></td>
+              <td>Despite higher fees, PayPal's brand trust lifts checkout conversion in certain buyer segments (international, older demographics, certain categories).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Ad slot 2 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-2-mid" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="container">
+        <h2>Side-by-side rate reference (2026)</h2>
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Stripe</th>
+              <th>Square</th>
+              <th>PayPal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Online domestic card</td>
+              <td class="rate">2.9% + $0.30</td>
+              <td class="rate">2.9% + $0.30</td>
+              <td class="rate">3.49% + $0.49</td>
+            </tr>
+            <tr>
+              <td>In-person (card-present)</td>
+              <td class="rate">2.7% + $0.05 (Terminal)</td>
+              <td class="rate winner">2.6% + $0.10</td>
+              <td class="rate">2.29% + $0.09 (Zettle)</td>
+            </tr>
+            <tr>
+              <td>Keyed (manually typed)</td>
+              <td class="rate">2.9% + $0.30</td>
+              <td class="rate">3.5% + $0.15</td>
+              <td class="rate">3.49% + $0.49</td>
+            </tr>
+            <tr>
+              <td>International card</td>
+              <td class="rate">+1.5% (4.4% + $0.30)</td>
+              <td class="rate">Limited support</td>
+              <td class="rate">+1.5% (4.99% + $0.49)</td>
+            </tr>
+            <tr>
+              <td>Currency conversion</td>
+              <td class="rate">+1%</td>
+              <td class="rate">n/a (no multi-currency)</td>
+              <td class="rate">~4%</td>
+            </tr>
+            <tr>
+              <td>ACH / bank transfer</td>
+              <td class="rate">0.8% cap $5</td>
+              <td class="rate winner">1% min $1</td>
+              <td class="rate">3.49% + $0.49</td>
+            </tr>
+            <tr>
+              <td>Invoice (card)</td>
+              <td class="rate">2.9% + $0.30 + 0.4%</td>
+              <td class="rate">3.3% + $0.30</td>
+              <td class="rate">3.49% + $0.49</td>
+            </tr>
+            <tr>
+              <td>Dispute / chargeback fee</td>
+              <td class="rate">$15</td>
+              <td class="rate winner">$0</td>
+              <td class="rate">$20</td>
+            </tr>
+            <tr>
+              <td>Refund fee behavior</td>
+              <td class="rate">Refunds all fees (most accounts)</td>
+              <td class="rate">Refunds all fees</td>
+              <td class="rate">Keeps fixed fee</td>
+            </tr>
+            <tr>
+              <td>Micropayments tier</td>
+              <td class="rate">—</td>
+              <td class="rate">—</td>
+              <td class="rate winner">4.99% + $0.09</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>The meta-question: which one should you pick?</h2>
+        <div class="prose">
+          <p>If you run an <strong>online-first US business</strong> with ~2,000+ transactions/month: <strong>Stripe</strong>. Developer ergonomics, international flexibility, and Connect platform tooling dominate at scale.</p>
+          <p>If you're a <strong>small retailer, restaurant, or service business</strong> doing in-person sales: <strong>Square</strong>. The 2.6% + $0.10 in-person rate, free base plan, and no-chargeback-fees policy compound to real savings.</p>
+          <p>If you sell primarily to <strong>buyers who prefer PayPal's Checkout experience</strong> (older demographics, international hobbyist markets, niche categories): <strong>PayPal</strong>, despite higher rates. Buyer trust lifts conversion; lift > fee delta in those segments.</p>
+          <p>If you run a <strong>B2B invoicing business with large tickets</strong>: <strong>Square ACH</strong> at 1% (min $1) on invoice-paid-via-bank is often the single cheapest option available.</p>
+          <p>Most real businesses end up using <em>two</em> processors: one primary, one backup. Stripe + Square is a common pairing. Stripe + PayPal is another. Decide based on the math — that's what this site exists for.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Affiliate CTA block -->
+    <section class="content">
+      <div class="container">
+        <div class="cta-block">
+          <h3>Pick your processor and go</h3>
+          <p class="cta-lede">Once you've decided which fee structure fits, these are the fastest ways to open a merchant account. Compare the rates above against your actual transaction mix before committing.</p>
+          <div class="cta-buttons">
+            <a href="https://www.shopify.com/?ref=PLACEHOLDER-SHOPIFY" class="cta-btn" rel="sponsored nofollow" target="_blank">Start with Shopify</a>
+            <a href="https://squareup.com/signup?ref=PLACEHOLDER-SQUARE" class="cta-btn" rel="sponsored nofollow" target="_blank">Start with Square</a>
+            <a href="https://www.paypal.com/business?ref=PLACEHOLDER-PAYPAL" class="cta-btn" rel="sponsored nofollow" target="_blank">Start with PayPal</a>
+            <a href="https://stripe.com/pricing" class="cta-btn secondary" rel="nofollow" target="_blank">Stripe pricing (direct)</a>
+          </div>
+          <p class="cta-disclosure">Some links are affiliate links — we may earn a commission at no cost to you. Stripe link is not affiliate. <a href="/terms#affiliate-disclosure">Full disclosure</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+
+        <details class="faq">
+          <summary>Why is Stripe's in-person rate Terminal-only?</summary>
+          <div class="answer">
+            Stripe doesn't offer a standalone Reader like Square. In-person Stripe requires Stripe Terminal (hardware SDK for point-of-sale apps) or a partner integration. For a small business that just wants a tap-to-pay device, Square is dramatically easier to set up.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>How do I actually run the numbers for my business?</summary>
+          <div class="answer">
+            Take your last month's transactions. Bucket them by type (online domestic, in-person, international, invoice). Multiply each bucket by each processor's rate. The one with the lowest total wins. Our <a href="/stripe-fee-calculator">Stripe</a>, <a href="/square-fee-calculator">Square</a>, and <a href="/paypal-fee-calculator">PayPal</a> calculators make the per-bucket math easy.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Does PayPal's brand trust really outweigh its higher fees?</summary>
+          <div class="answer">
+            Sometimes. Studies on PayPal conversion lift vs. card-only checkout generally show 10–30% conversion improvements in certain audiences. At 3.49% + $0.49 vs 2.9% + $0.30, PayPal costs about 0.6% more per transaction. If PayPal lifts your conversion by more than 0.6%, it pays for itself. Test it with your own audience.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>What about Shopify Payments, Braintree, Adyen?</summary>
+          <div class="answer">
+            Shopify Payments (Stripe under the hood, priced at 2.9% + $0.30 online for Basic plan, lower for Plus) is compelling if you're already on Shopify. Braintree (owned by PayPal, priced like Stripe) is the enterprise option. Adyen is strong for international at scale. We'll add calculators for these — fastest-follow is Shopify.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Is this comparison affiliated with anyone?</summary>
+          <div class="answer">
+            netfee.io is independent. We participate in affiliate programs with Shopify, Square (via Impact), and PayPal (via Impact). Stripe doesn't have a classic affiliate program and we link to their pricing page without tracking. Affiliate relationships don't affect the numbers we publish.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Ad slot 3 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-3-faq" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>netfee.io</h4>
+        <p class="brand-line"><strong>The honest fee calculator.</strong> No sign-up, no email capture, no stored data — just the math, using current rates.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <a href="/stripe-fee-calculator">Stripe fee calculator</a>
+        <a href="/square-fee-calculator">Square fee calculator</a>
+        <a href="/paypal-fee-calculator">PayPal fee calculator</a>
+        <a href="/compare">Head-to-head comparison</a>
+      </div>
+      <div>
+        <h4>About</h4>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/terms#affiliate-disclosure">Affiliate disclosure</a>
+      </div>
+      <div class="legal">
+        © 2026 netfee.io · Operated by Robot Arms LLC (Colorado) · Rates current as of April 2026 · Always verify with the processor before making business decisions · Not affiliated with Stripe, Square, PayPal, or Shopify · Some external links are affiliate links — <a href="/terms#affiliate-disclosure">full disclosure</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Rate tables keyed by scenario. Each scenario defines what rate each processor charges.
+    const SCENARIOS = {
+      'online-domestic': {
+        label: 'Online domestic: cards entered online via checkout, processed as standard US card-not-present.',
+        stripe: { pct: 0.029, fixed: 0.30, label: '2.9% + $0.30' },
+        square: { pct: 0.029, fixed: 0.30, label: '2.9% + $0.30' },
+        paypal: { pct: 0.0349, fixed: 0.49, label: '3.49% + $0.49' }
+      },
+      'in-person': {
+        label: 'In-person: physical card dipped, tapped, or swiped via merchant hardware.',
+        stripe: { pct: 0.027, fixed: 0.05, label: '2.7% + $0.05 (Terminal)' },
+        square: { pct: 0.026, fixed: 0.10, label: '2.6% + $0.10' },
+        paypal: { pct: 0.0229, fixed: 0.09, label: '2.29% + $0.09 (Zettle)' }
+      },
+      'keyed': {
+        label: 'Keyed: card-not-present, manually typed into a POS terminal. Higher interchange cost.',
+        stripe: { pct: 0.029, fixed: 0.30, label: '2.9% + $0.30' },
+        square: { pct: 0.035, fixed: 0.15, label: '3.5% + $0.15' },
+        paypal: { pct: 0.0349, fixed: 0.49, label: '3.49% + $0.49' }
+      },
+      'invoice': {
+        label: 'Invoice: sent to the customer, paid online by card.',
+        stripe: { pct: 0.033, fixed: 0.30, label: '3.3% + $0.30 (Stripe Invoicing)' },
+        square: { pct: 0.033, fixed: 0.30, label: '3.3% + $0.30' },
+        paypal: { pct: 0.0349, fixed: 0.49, label: '3.49% + $0.49' }
+      },
+      'international': {
+        label: 'International: non-US card processed by US merchant account.',
+        stripe: { pct: 0.044, fixed: 0.30, label: '4.4% + $0.30' },
+        square: { pct: null, fixed: null, label: 'Limited support', note: 'Square has limited international card support in the US — use Stripe or PayPal.' },
+        paypal: { pct: 0.0499, fixed: 0.49, label: '4.99% + $0.49' }
+      },
+      'micro': {
+        label: 'Micropayments: small transactions ($1–$10). PayPal\'s opt-in tier is uniquely suited here.',
+        stripe: { pct: 0.029, fixed: 0.30, label: '2.9% + $0.30' },
+        square: { pct: 0.029, fixed: 0.30, label: '2.9% + $0.30' },
+        paypal: { pct: 0.0499, fixed: 0.09, label: '4.99% + $0.09 (Micropayments)' }
+      }
+    };
+
+    const $ = id => document.getElementById(id);
+    const fmt = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    function calc(amt, r) {
+      if (r.pct === null) return null;
+      return amt * r.pct + r.fixed;
+    }
+
+    function render() {
+      const amt = parseFloat($('amount').value) || 0;
+      const s = SCENARIOS[$('scenario').value];
+      const rows = [
+        { name: 'Stripe',  ...s.stripe },
+        { name: 'Square',  ...s.square },
+        { name: 'PayPal',  ...s.paypal }
+      ].map(p => ({ ...p, fee: calc(amt, p) }))
+       .map(p => ({ ...p, net: p.fee === null ? null : Math.max(0, amt - p.fee) }));
+
+      // Find winner (lowest fee among valid)
+      const valid = rows.filter(r => r.fee !== null);
+      const winnerNet = valid.length ? Math.max(...valid.map(r => r.net)) : null;
+
+      const out = $('compare-results');
+      out.innerHTML = rows.map(r => {
+        if (r.fee === null) {
+          return `
+            <div class="compare-row">
+              <span class="processor">${r.name}</span>
+              <span class="fee" style="font-style: italic;">${r.label}</span>
+              <span class="net" style="color: var(--gray-400);">n/a</span>
+            </div>`;
+        }
+        const isWinner = r.net === winnerNet;
+        return `
+          <div class="compare-row${isWinner ? ' winner' : ''}">
+            <span class="processor">${r.name}</span>
+            <span class="fee">${r.label} — fee ${fmt(r.fee)}</span>
+            <span class="net">${fmt(r.net)}</span>
+          </div>`;
+      }).join('');
+
+      $('scenario-note').textContent = s.label;
+    }
+
+    $('amount').addEventListener('input', render);
+    $('scenario').addEventListener('change', render);
+    render();
+  </script>
+
+</body>
+</html>
