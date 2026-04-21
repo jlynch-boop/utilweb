@@ -1,5 +1,0 @@
-# Cloudflare Pages redirects
-# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
-
-# Consolidate www → apex (301 permanent)
-https://www.netfee.io/* https://netfee.io/:splat 301
