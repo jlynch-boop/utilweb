@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopify Fee Calculator (2026) — Basic, Shopify & Advanced Plans | netfee.io</title>
+  <meta name="description" content="Calculate your exact Shopify Payments fee and net take-home across every plan (Starter, Basic, Shopify, Advanced). Current 2026 rates plus the third-party-gateway penalty.">
+  <link rel="canonical" href="https://netfee.io/shopify-fee-calculator">
+
+  <link rel="icon" type="image/svg+xml" href="/logo.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:title" content="Shopify Fee Calculator (2026) — All Plans">
+  <meta property="og:description" content="Calculate Shopify Payments fees across Starter, Basic, Shopify, and Advanced plans. Current 2026 rates.">
+  <meta property="og:url" content="https://netfee.io/shopify-fee-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="netfee.io">
+  <meta property="og:image" content="https://netfee.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://netfee.io/og-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shopify Fee Calculator (2026)">
+  <meta name="twitter:description" content="Calculate Shopify fees across every plan. Current 2026 rates.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Shopify Fee Calculator",
+        "url": "https://netfee.io/shopify-fee-calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Calculate exact Shopify Payments transaction fees across Starter, Basic, Shopify, and Advanced plans using current 2026 rates."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What are Shopify's transaction fees in 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "On Shopify Payments, rates are 2.9% + $0.30 for Basic, 2.7% + $0.30 for Shopify, and 2.5% + $0.30 for Advanced on online card sales. In-person is 2.7%, 2.5%, and 2.4% respectively. Shopify Starter is 5% + $0.30 online. These are in addition to the monthly plan subscription ($5, $39, $105, or $399)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if I use a third-party gateway instead of Shopify Payments?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Shopify charges an additional transaction fee when you use a non-Shopify-Payments gateway: 2% on Basic, 1% on Shopify, and 0.5% on Advanced. This stacks on top of the gateway's own processing fees (e.g. Stripe's 2.9% + $0.30), making third-party gateways expensive on Shopify. Shopify Payments usually wins on pure cost."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Shopify charge chargeback fees?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Shopify charges $15 per chargeback, refunded if you win the dispute. This is in line with Stripe ($15) and lower than PayPal ($20). Square is the outlier with no chargeback fee."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Shopify cheaper than Stripe for e-commerce?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Per-transaction, Shopify Payments on the Basic plan matches Stripe exactly at 2.9% + $0.30. Where Shopify differs is the monthly subscription ($39+) and the full storefront platform. If you only need payment processing, Stripe is cheaper. If you want a complete store (checkout, inventory, themes, apps), Shopify's bundled cost is typically worth it."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google AdSense (publisher: ca-pub-4144260522213667) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4144260522213667" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-mark" aria-hidden="true"></span>
+        <span>netfee.io</span>
+      </a>
+      <div class="nav-links">
+        <a href="/stripe-fee-calculator">Stripe</a>
+        <a href="/square-fee-calculator">Square</a>
+        <a href="/paypal-fee-calculator">PayPal</a>
+        <a href="/shopify-fee-calculator" class="active">Shopify</a>
+        <a href="/compare">Compare</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Shopify Fee Calculator</h1>
+        <p class="lede">Enter your transaction amount. See your exact Shopify Payments fee and net take-home across every plan — Starter, Basic, Shopify, and Advanced — plus the third-party-gateway penalty, using current 2026 rates.</p>
+        <p class="trust">No sign-up. No email. Nothing stored. <strong>Rates current as of April 2026.</strong></p>
+
+        <div class="calc-wrap">
+          <div class="calc-card">
+            <div class="calc-title">Calculate your fee</div>
+
+            <div class="input-group">
+              <label for="amount">Transaction amount</label>
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="amount" value="100.00" min="0.01" step="0.01" inputmode="decimal">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="paymentType">Plan &amp; payment type</label>
+              <select id="paymentType">
+                <option value="basic-online">Basic · Online (2.9% + $0.30)</option>
+                <option value="basic-pos">Basic · In-person (2.7%)</option>
+                <option value="shopify-online">Shopify · Online (2.7% + $0.30)</option>
+                <option value="shopify-pos">Shopify · In-person (2.5%)</option>
+                <option value="advanced-online">Advanced · Online (2.5% + $0.30)</option>
+                <option value="starter-online">Starter · Online (5% + $0.30)</option>
+                <option value="third-party-basic">Basic + third-party gateway (2% penalty on top of processor)</option>
+              </select>
+            </div>
+
+            <div class="results" aria-live="polite">
+              <div class="result-row">
+                <span>Gross transaction</span>
+                <strong id="r-amount">$100.00</strong>
+              </div>
+              <div class="result-row">
+                <span id="r-fee-label">Shopify fee (2.9% + $0.30)</span>
+                <strong id="r-fee">−$3.20</strong>
+              </div>
+              <div class="result-row total">
+                <span>You receive</span>
+                <strong id="r-net">$96.80</strong>
+              </div>
+            </div>
+
+            <div class="rate-note" id="rate-note">Basic plan · online: 2.9% + $0.30 per successful charge. Plus $39/mo subscription.</div>
+          </div>
+
+          <div class="quick-card">
+            <div class="calc-title">Quick reference — Basic plan online</div>
+            <table class="quick-table" aria-label="Common transaction amounts and net take-home at Basic plan online rate">
+              <thead>
+                <tr>
+                  <th>Transaction</th>
+                  <th>Shopify fee</th>
+                  <th>You keep</th>
+                </tr>
+              </thead>
+              <tbody id="quick-body"></tbody>
+            </table>
+            <div class="rate-note" style="margin-top:1rem;">
+              Assumes Shopify Payments on Basic plan at 2.9% + $0.30. Monthly subscription ($39) not included in this table.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad slot 1 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-1-hero" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="container">
+        <h2>How Shopify fees actually work</h2>
+        <div class="prose">
+          <p>Shopify is different from Stripe, Square, and PayPal — it's not <em>just</em> a payment processor. It's a full e-commerce platform (storefront, checkout, inventory, themes, apps), and the payment processing is just one piece. So your total cost has two parts:</p>
+          <ol>
+            <li><strong>A flat monthly subscription</strong> — $5 (Starter), $39 (Basic), $105 (Shopify), or $399 (Advanced).</li>
+            <li><strong>Per-transaction fees</strong> — varies by plan and payment type, same formula as every other processor: <code>fee = (amount × rate%) + fixed</code></li>
+          </ol>
+          <p>On Shopify Payments (their built-in processor), a $100 online sale on the Basic plan costs <code>$100 × 0.029 + $0.30 = $3.20</code> — identical to Stripe. The plan upgrade to Shopify ($105/mo) drops the rate to 2.7% + $0.30, and Advanced ($399/mo) drops it to 2.5% + $0.30.</p>
+          <p>If you use a <strong>third-party gateway</strong> instead of Shopify Payments, Shopify charges an additional penalty on top of the gateway's own fee. For most merchants, using Shopify Payments is the right choice on pure cost.</p>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Current Shopify plans &amp; rates (2026)</h3>
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>Monthly</th>
+              <th>Online</th>
+              <th>In-person</th>
+              <th>Third-party gateway penalty</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Starter</td>
+              <td>$5</td>
+              <td class="rate">5% + $0.30</td>
+              <td class="rate">—</td>
+              <td class="rate">n/a (no storefront)</td>
+            </tr>
+            <tr>
+              <td>Basic Shopify</td>
+              <td>$39</td>
+              <td class="rate">2.9% + $0.30</td>
+              <td class="rate">2.7%</td>
+              <td class="rate">+2.0%</td>
+            </tr>
+            <tr>
+              <td>Shopify</td>
+              <td>$105</td>
+              <td class="rate">2.7% + $0.30</td>
+              <td class="rate">2.5%</td>
+              <td class="rate">+1.0%</td>
+            </tr>
+            <tr>
+              <td>Advanced Shopify</td>
+              <td>$399</td>
+              <td class="rate">2.5% + $0.30</td>
+              <td class="rate">2.4%</td>
+              <td class="rate">+0.5%</td>
+            </tr>
+            <tr>
+              <td>Shopify Plus</td>
+              <td>$2,300+</td>
+              <td class="rate">Custom (~2.15% + $0.30)</td>
+              <td class="rate">Custom</td>
+              <td class="rate">Negotiable</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>Heads up:</strong> These are the standard US rates. International cards add 1%, currency conversion adds 2%, and chargebacks cost $15 each (refunded if won). Enterprise Shopify Plus pricing is negotiable. Always verify at <a href="https://www.shopify.com/pricing" rel="nofollow">shopify.com/pricing</a>.
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>When does upgrading your plan pay off?</h2>
+        <div class="prose">
+          <p>The higher-tier plans cost more per month but have lower transaction fees. The math to see which plan is cheapest depends on your monthly processing volume. Rough break-even points on pure transaction cost:</p>
+        </div>
+
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Monthly volume</th>
+              <th>Cheapest plan</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Under $800/mo</td><td class="winner">Starter or Basic</td><td>Subscription savings outweigh higher rate.</td></tr>
+            <tr><td>$800 – $10,000/mo</td><td class="winner">Basic ($39)</td><td>Low subscription; 2.9% is fine at this volume.</td></tr>
+            <tr><td>$10,000 – $40,000/mo</td><td class="winner">Shopify ($105)</td><td>0.2% rate drop beats the extra $66/mo in subscription.</td></tr>
+            <tr><td>$40,000+/mo</td><td class="winner">Advanced ($399)</td><td>0.4% rate drop vs Basic easily beats $360/mo subscription gap.</td></tr>
+            <tr><td>$800,000+/mo</td><td class="winner">Plus (custom)</td><td>Enterprise negotiation gets rates below 2.15%.</td></tr>
+          </tbody>
+        </table>
+
+        <p class="prose" style="margin-top: 1.5rem;">This only accounts for payment fees. The higher plans also unlock features (more staff, better reports, lower shipping rates, gift cards, etc.) — factor those in separately.</p>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Worked examples — Basic plan</h2>
+        <p class="prose">Shopify's fixed $0.30 has the same effect as Stripe's — it punishes small transactions. If your average order value is under $20, consider whether you actually need a full Shopify plan vs. Starter or a lighter tool.</p>
+
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Gross</th>
+              <th>Online fee (Basic)</th>
+              <th>You keep</th>
+              <th>Effective rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>$5.00</td><td class="rate">$0.45</td><td class="rate">$4.55</td><td>9.00%</td></tr>
+            <tr><td>$10.00</td><td class="rate">$0.59</td><td class="rate">$9.41</td><td>5.90%</td></tr>
+            <tr><td>$25.00</td><td class="rate">$1.03</td><td class="rate">$23.97</td><td>4.12%</td></tr>
+            <tr><td>$50.00</td><td class="rate">$1.75</td><td class="rate">$48.25</td><td>3.50%</td></tr>
+            <tr><td>$100.00</td><td class="rate">$3.20</td><td class="rate">$96.80</td><td>3.20%</td></tr>
+            <tr><td>$500.00</td><td class="rate">$14.80</td><td class="rate">$485.20</td><td>2.96%</td></tr>
+            <tr><td>$1,000.00</td><td class="rate">$29.30</td><td class="rate">$970.70</td><td>2.93%</td></tr>
+            <tr><td>$5,000.00</td><td class="rate">$145.30</td><td class="rate">$4,854.70</td><td>2.91%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Ad slot 2 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-2-mid" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="container">
+        <h2>Hidden Shopify costs most guides miss</h2>
+        <div class="prose">
+          <ul>
+            <li><strong>Monthly subscription is real money.</strong> On Basic ($39/mo), you need to process at least ~$1,350/month in online card sales just to break even vs. a free Stripe account (ignoring Shopify's storefront value). Factor in the platform benefits — it's usually worth it for real stores — but know the floor.</li>
+            <li><strong>Third-party gateway penalty stacks.</strong> If you process via Stripe through Shopify instead of using Shopify Payments, you pay Stripe's 2.9% + $0.30 <em>plus</em> Shopify's 2% Basic-plan penalty. That's effectively 4.9% + $0.30 — dramatically higher than either alone.</li>
+            <li><strong>Apps add up fast.</strong> Shopify's app ecosystem is a major reason people pick it, but the monthly fees for SEO, reviews, email, subscription management, tax, analytics, and loyalty apps routinely total $100–$500/month for real merchants.</li>
+            <li><strong>Theme costs.</strong> Free themes work but most serious stores spend $200–$400 on a premium theme (one-time). Custom theme dev is $2k–$20k.</li>
+            <li><strong>Transaction fees for Starter ($5/mo).</strong> The cheapest plan has the <em>highest</em> per-transaction rate (5% + $0.30). For social-only selling with very low volume it's fine. For a real store, jump to Basic.</li>
+            <li><strong>Currency conversion.</strong> Shopify adds 2% on top when converting currencies — in line with Stripe but worth noting for international merchants.</li>
+            <li><strong>Chargeback fee: $15.</strong> Same as Stripe, lower than PayPal. Refunded if you win the dispute.</li>
+            <li><strong>Shipping, sales tax, fraud protection.</strong> Shopify Shipping can save 20%+ on USPS/UPS/DHL rates if you use it, and Shopify has a built-in tax engine. These are benefits, not hidden costs, but worth knowing.</li>
+          </ul>
+          <p>The calculator above focuses on payment processing. For the full "cost of Shopify" picture, model in your subscription, apps, and chargebacks separately.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Shopify vs Stripe vs Square vs PayPal fees</h2>
+        <p class="prose">Shopify Payments matches Stripe and Square on Basic-plan online rates (2.9% + $0.30) but you're paying for the whole platform on top. If you only need processing, Stripe is cheaper; if you need a real storefront, Shopify's bundled pricing is typically worth it.</p>
+
+        <div class="compare-grid">
+          <a href="/stripe-fee-calculator" class="compare-card">
+            <h3>Stripe</h3>
+            <div class="rate-line">2.9% + $0.30 · US card</div>
+            <span class="link">Calculate Stripe fees →</span>
+          </a>
+          <a href="/square-fee-calculator" class="compare-card">
+            <h3>Square</h3>
+            <div class="rate-line">2.6% + $0.10 · in-person</div>
+            <span class="link">Calculate Square fees →</span>
+          </a>
+          <a href="/paypal-fee-calculator" class="compare-card">
+            <h3>PayPal</h3>
+            <div class="rate-line">3.49% + $0.49 · Checkout</div>
+            <span class="link">Calculate PayPal fees →</span>
+          </a>
+          <a href="/shopify-fee-calculator" class="compare-card current">
+            <h3>Shopify</h3>
+            <div class="rate-line">2.9% + $0.30 · Basic · Online</div>
+            <span class="link">Current page</span>
+          </a>
+          <a href="/compare" class="compare-card">
+            <h3>Head-to-head</h3>
+            <div class="rate-line">Compare all processors at your volume</div>
+            <span class="link">Open comparison →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Affiliate CTA block -->
+    <section class="content">
+      <div class="container">
+        <div class="cta-block">
+          <h3>Ready to launch a Shopify store?</h3>
+          <p class="cta-lede">Shopify gives you a full storefront, checkout, inventory, and payment processing in one. Free trial, no credit card required. If you want an online store (not just a processor), start here.</p>
+          <div class="cta-buttons">
+            <a href="https://shopify.pxf.io/rEGVZB" class="cta-btn" rel="sponsored nofollow" target="_blank">Start a free Shopify trial</a>
+            <a href="https://squareup.com/signup?ref=PLACEHOLDER-SQUARE" class="cta-btn secondary" rel="sponsored nofollow" target="_blank">Consider Square</a>
+            <a href="https://www.paypal.com/business?ref=PLACEHOLDER-PAYPAL" class="cta-btn secondary" rel="sponsored nofollow" target="_blank">Consider PayPal</a>
+            <a href="https://stripe.com/pricing" class="cta-btn secondary" rel="nofollow" target="_blank">Stripe pricing (direct)</a>
+          </div>
+          <p class="cta-disclosure">Some links are affiliate links — we may earn a commission at no cost to you. Stripe link is not affiliate. <a href="/terms#affiliate-disclosure">Full disclosure</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+
+        <details class="faq">
+          <summary>What are Shopify's transaction fees in 2026?</summary>
+          <div class="answer">
+            On Shopify Payments: Basic is <strong>2.9% + $0.30</strong> online and 2.7% in-person, Shopify is 2.7% + $0.30 online and 2.5% in-person, and Advanced is 2.5% + $0.30 online and 2.4% in-person. Shopify Starter is 5% + $0.30 online. These are in addition to the monthly subscription.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>What's the third-party gateway penalty?</summary>
+          <div class="answer">
+            If you use a non-Shopify-Payments gateway (e.g. Stripe, Authorize.net), Shopify adds an extra transaction fee: <strong>2% on Basic, 1% on Shopify, 0.5% on Advanced</strong>. This stacks on top of the gateway's own processing fee, making third-party gateways meaningfully more expensive than Shopify Payments for most merchants.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Does Shopify charge chargeback fees?</summary>
+          <div class="answer">
+            Yes — <strong>$15 per chargeback</strong>. Refunded if you win the dispute. Same as Stripe, lower than PayPal's $20, and higher than Square's $0.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Is Shopify cheaper than Stripe?</summary>
+          <div class="answer">
+            On pure per-transaction cost, Shopify Payments on Basic matches Stripe exactly (2.9% + $0.30). Higher Shopify plans are cheaper per-transaction, but you're paying a monthly subscription. If you only need payment processing, Stripe is cheaper. If you need a full storefront, Shopify's bundle is usually worth it.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>When should I upgrade from Basic to Shopify or Advanced?</summary>
+          <div class="answer">
+            Rough break-even on pure transaction cost: upgrade to Shopify ($105/mo) around <strong>$10,000+/month in online sales</strong>, and to Advanced ($399/mo) around <strong>$40,000+/month</strong>. But higher plans also unlock features (more staff accounts, advanced reports, lower shipping rates, gift cards), so factor those in.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Is this calculator affiliated with Shopify?</summary>
+          <div class="answer">
+            netfee.io participates in Shopify's affiliate program. If you click through and sign up for Shopify from this page, we may earn a commission at no additional cost to you. This doesn't influence the rates we publish — we show the same numbers whether Shopify has an affiliate program or not.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Ad slot 3 -->
+    <div class="container">
+      <div class="ad-slot" data-slot="slot-3-faq" aria-hidden="true">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>netfee.io</h4>
+        <p class="brand-line"><strong>The honest fee calculator.</strong> No sign-up, no email capture, no stored data — just the math, using current rates.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <a href="/stripe-fee-calculator">Stripe fee calculator</a>
+        <a href="/square-fee-calculator">Square fee calculator</a>
+        <a href="/paypal-fee-calculator">PayPal fee calculator</a>
+        <a href="/shopify-fee-calculator">Shopify fee calculator</a>
+        <a href="/compare">Head-to-head comparison</a>
+      </div>
+      <div>
+        <h4>About</h4>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/terms#affiliate-disclosure">Affiliate disclosure</a>
+      </div>
+      <div class="legal">
+        © 2026 netfee.io · Operated by Robot Arms LLC (Colorado) · Rates current as of April 2026 · Always verify with the processor before making business decisions · Not affiliated with Stripe, Square, PayPal, or Shopify · Some external links are affiliate links — <a href="/terms#affiliate-disclosure">full disclosure</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const RATES = {
+      'basic-online':      { pct: 0.029, fixed: 0.30, label: 'Basic · Online (2.9% + $0.30)' },
+      'basic-pos':         { pct: 0.027, fixed: 0.00, label: 'Basic · In-person (2.7%)' },
+      'shopify-online':    { pct: 0.027, fixed: 0.30, label: 'Shopify · Online (2.7% + $0.30)' },
+      'shopify-pos':       { pct: 0.025, fixed: 0.00, label: 'Shopify · In-person (2.5%)' },
+      'advanced-online':   { pct: 0.025, fixed: 0.30, label: 'Advanced · Online (2.5% + $0.30)' },
+      'starter-online':    { pct: 0.05,  fixed: 0.30, label: 'Starter · Online (5% + $0.30)' },
+      'third-party-basic': { pct: 0.049, fixed: 0.30, label: 'Basic + third-party (4.9% + $0.30 combined)' }
+    };
+
+    const NOTE = {
+      'basic-online':      'Basic plan · online: 2.9% + $0.30 per successful charge. Plus $39/mo subscription.',
+      'basic-pos':         'Basic plan · in-person: 2.7% per transaction (no fixed fee in-person). Plus $39/mo.',
+      'shopify-online':    'Shopify plan · online: 2.7% + $0.30 per charge. Plus $105/mo subscription.',
+      'shopify-pos':       'Shopify plan · in-person: 2.5% per transaction. Plus $105/mo.',
+      'advanced-online':   'Advanced plan · online: 2.5% + $0.30. Plus $399/mo subscription.',
+      'starter-online':    'Starter · online: 5% + $0.30. For social-only selling with very low volume. Plus $5/mo.',
+      'third-party-basic': 'Using a third-party gateway on Basic: Stripe-equivalent 2.9% + $0.30 plus Shopify\'s 2% penalty = 4.9% + $0.30 all-in. Avoid unless you have a specific reason.'
+    };
+
+    const $ = id => document.getElementById(id);
+    const fmt = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    function calcFee(amount, rateKey) {
+      const r = RATES[rateKey];
+      return amount * r.pct + r.fixed;
+    }
+
+    function updateCalc() {
+      const amt = parseFloat($('amount').value) || 0;
+      const type = $('paymentType').value;
+      const fee = calcFee(amt, type);
+      const net = Math.max(0, amt - fee);
+
+      $('r-amount').textContent = fmt(amt);
+      $('r-fee').textContent = '−' + fmt(fee);
+      $('r-net').textContent = fmt(net);
+      $('r-fee-label').textContent = 'Shopify fee — ' + RATES[type].label.replace(/[()]/g, '').replace(/^[^a-zA-Z]+/, '');
+      $('rate-note').textContent = NOTE[type];
+    }
+    $('amount').addEventListener('input', updateCalc);
+    $('paymentType').addEventListener('change', updateCalc);
+
+    const quickAmounts = [10, 25, 50, 100, 250, 500, 1000, 2500, 5000];
+    const quickBody = $('quick-body');
+    quickAmounts.forEach(amt => {
+      const fee = calcFee(amt, 'basic-online');
+      const net = amt - fee;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${fmt(amt)}</td><td>${fmt(fee)}</td><td class="net">${fmt(net)}</td>`;
+      quickBody.appendChild(tr);
+    });
+
+    updateCalc();
+  </script>
+
+</body>
+</html>

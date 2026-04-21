@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Stripe Fees Actually Work (2026 Guide) | netfee.io</title>
+  <meta name="description" content="A plain-English walkthrough of how Stripe fees work in 2026: domestic cards, international surcharges, currency conversion, ACH, Link, disputes, and Connect. With worked examples.">
+  <link rel="canonical" href="https://netfee.io/guides/how-stripe-fees-work">
+
+  <link rel="icon" type="image/svg+xml" href="/logo.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:title" content="How Stripe Fees Actually Work (2026 Guide)">
+  <meta property="og:description" content="Plain-English walkthrough of Stripe fees: cards, international, currency conversion, ACH, Link, disputes, Connect. With worked examples.">
+  <meta property="og:url" content="https://netfee.io/guides/how-stripe-fees-work">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="netfee.io">
+  <meta property="og:image" content="https://netfee.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://netfee.io/og-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Stripe Fees Actually Work (2026)">
+  <meta name="twitter:description" content="Plain-English walkthrough of Stripe's fee structure.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How Stripe Fees Actually Work (2026 Guide)",
+    "description": "A plain-English walkthrough of Stripe's fee structure including domestic cards, international surcharges, currency conversion, ACH, disputes, and Connect.",
+    "author": { "@type": "Organization", "name": "netfee.io" },
+    "publisher": { "@type": "Organization", "name": "Robot Arms LLC" },
+    "datePublished": "2026-04-21",
+    "dateModified": "2026-04-21",
+    "image": "https://netfee.io/og-image.png",
+    "mainEntityOfPage": "https://netfee.io/guides/how-stripe-fees-work"
+  }
+  </script>
+
+  <!-- Google AdSense (publisher: ca-pub-4144260522213667) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4144260522213667" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-mark" aria-hidden="true"></span>
+        <span>netfee.io</span>
+      </a>
+      <div class="nav-links">
+        <a href="/stripe-fee-calculator">Stripe</a>
+        <a href="/square-fee-calculator">Square</a>
+        <a href="/paypal-fee-calculator">PayPal</a>
+        <a href="/shopify-fee-calculator">Shopify</a>
+        <a href="/compare">Compare</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-body">
+    <article class="container" style="max-width: 780px;">
+      <div class="meta">Guide · April 2026 · 8 min read</div>
+      <h1 style="margin-bottom: 0.5rem;">How Stripe fees actually work</h1>
+      <p class="lede" style="font-size: 1.1rem; color: var(--gray-500); margin-bottom: 2rem;">A plain-English walkthrough of what you'll pay Stripe in 2026, covering every scenario — with a running example of how a $100 sale turns into $96.80.</p>
+
+      <h2>The headline rate</h2>
+      <p>Stripe's famous rate is <strong>2.9% + $0.30</strong>. That's what they charge for every successful domestic US card transaction, regardless of the card brand (Visa, Mastercard, Amex, Discover — all the same). The rate has been stable for over a decade; it's the industry reference point that Square and Shopify Payments both mirror.</p>
+      <p>The formula is simple:</p>
+      <p><code>fee = (amount × 0.029) + 0.30</code></p>
+      <p>On a $100 sale, that's <code>$2.90 + $0.30 = $3.20</code>. You receive $96.80 deposited to your bank account. Stripe deducts the fee from each transaction before paying out — there's no separate monthly bill.</p>
+
+      <h2>Why the fixed $0.30 matters so much</h2>
+      <p>The percentage scales with the transaction, but the fixed fee doesn't. That makes the <em>effective rate</em> much higher on small transactions:</p>
+      <table class="rates-table">
+        <thead><tr><th>Sale</th><th>Fee</th><th>Effective rate</th></tr></thead>
+        <tbody>
+          <tr><td>$5</td><td>$0.45</td><td>9.00%</td></tr>
+          <tr><td>$10</td><td>$0.59</td><td>5.90%</td></tr>
+          <tr><td>$50</td><td>$1.75</td><td>3.50%</td></tr>
+          <tr><td>$100</td><td>$3.20</td><td>3.20%</td></tr>
+          <tr><td>$500</td><td>$14.80</td><td>2.96%</td></tr>
+          <tr><td>$5,000</td><td>$145.30</td><td>2.91%</td></tr>
+        </tbody>
+      </table>
+      <p>On a $5 sale Stripe keeps 9%. On a $5,000 sale they keep 2.91%. If your average order value is under $20, pay attention: the fixed fee dominates and makes card processing genuinely expensive relative to alternatives like ACH.</p>
+
+      <h2>International cards and currency conversion</h2>
+      <p>When a non-US card pays you, Stripe adds a <strong>1.5% international surcharge</strong>. Total: 4.4% + $0.30. When the payment involves currency conversion (the customer pays in EUR, you receive USD, for example), Stripe adds another <strong>1%</strong>. That's 5.4% + $0.30 all-in.</p>
+      <p>These two add-ons stack on top of the base rate:</p>
+      <ul>
+        <li>US card → 2.9% + $0.30</li>
+        <li>International card (same currency) → 4.4% + $0.30</li>
+        <li>International card with currency conversion → 5.4% + $0.30</li>
+      </ul>
+      <p>For cross-border SaaS and DTC merchants, this matters. On a €100 subscription paid by a European customer with currency conversion, Stripe keeps <strong>€5.70</strong> — versus €3.20 for a US customer paying in USD. That's a real drag on international revenue.</p>
+
+      <h2>ACH Direct Debit — the cheap alternative</h2>
+      <p>For US bank account debits (ACH), Stripe charges just <strong>0.8% capped at $5</strong> per transaction. On a $5,000 B2B invoice, that's $5 via ACH versus $145.30 via card. If you can get your customer to pay by bank account — for B2B especially — ACH is a massive win.</p>
+      <p>Trade-off: ACH takes 3–5 business days to settle. The customer needs to provide bank account details instead of a card. For B2B invoicing and large one-off payments, worth it. For consumer checkout, card is usually still the right call.</p>
+      <p><strong>Stripe Link</strong> (their stored-bank product) has the same economics: 0.8% capped at $5. Once a customer saves their bank via Link, subsequent payments are one-click and cheap.</p>
+
+      <h2>Disputes cost $15 each</h2>
+      <p>When a customer files a chargeback through their card issuer, Stripe charges you <strong>$15 per dispute</strong>, on top of refunding the transaction. If you win the dispute (by submitting evidence), the $15 is <em>not</em> returned.</p>
+      <p>For most businesses, disputes are a small part of total cost. For digital goods, subscriptions, and high-fraud-risk categories (luxury, event tickets), dispute costs add up fast. Stripe's <a href="/square-fee-calculator">Square</a> at $0/dispute is the outlier here; <a href="/paypal-fee-calculator">PayPal</a>'s $20/dispute is the worst.</p>
+
+      <!-- Ad slot -->
+      <div class="ad-slot" data-slot="guide-slot-mid" aria-hidden="true" style="margin: 3rem auto;">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+
+      <h2>Refunds: what gets returned?</h2>
+      <p>On modern Stripe accounts, when you refund a transaction Stripe generally refunds the full fee (both the percentage and the $0.30). That's different from <a href="/paypal-fee-calculator">PayPal</a>, which keeps the fixed fee on refunds. It's aligned with <a href="/square-fee-calculator">Square</a>.</p>
+      <p>Older Stripe accounts (pre-2022) may have different behavior. If you're on a long-standing account and refunds are common, check your Stripe dashboard settings or confirm with support.</p>
+
+      <h2>Stripe Terminal — in-person rates</h2>
+      <p>For in-person card processing via Stripe Terminal (their hardware SDK), rates drop to <strong>2.7% + $0.05</strong>. Note this is a different pricing from the online rate, so an in-person sale on Stripe Terminal costs less per transaction than online. If you take card-present payments, Terminal is typically cheaper than the online rate (though it costs more to set up hardware — Stripe Reader M2 is ~$59, BBPOS WisePOS E is ~$349).</p>
+      <p>For a small business just wanting a tap-to-pay reader, Stripe Terminal is harder to set up than Square. Square's ecosystem is more turn-key. But if you already have Stripe on the software side, Terminal integrates cleanly.</p>
+
+      <h2>Stripe Connect — the platform fees</h2>
+      <p>If you're building a marketplace or SaaS platform on Stripe Connect, there are additional pricing layers:</p>
+      <ul>
+        <li><strong>Standard Connect:</strong> Same as regular Stripe fees, but Stripe handles payouts to your platform's sub-merchants.</li>
+        <li><strong>Express Connect:</strong> 0.25% + $2 per active account per month (plus regular transaction fees).</li>
+        <li><strong>Custom Connect:</strong> 0.4% + $2 per active account per month.</li>
+      </ul>
+      <p>On top of these, your platform can charge its own <em>platform fee</em> — a percentage you collect on each transaction that passes through your marketplace. That's revenue for your business, not a Stripe cost.</p>
+
+      <h2>Radar (fraud detection)</h2>
+      <p>Standard Radar is free and automatic — Stripe screens every charge for fraud and blocks the most obvious ones. <strong>Radar for Fraud Teams</strong> ($0.05 per screened charge) unlocks custom rules, allow/block lists, 3D Secure workflows, and manual review queues. For most merchants under $1M/year in volume, standard Radar is fine.</p>
+
+      <h2>Instant Payouts</h2>
+      <p>Standard Stripe payouts arrive in your bank account in <strong>2 business days</strong>, free. <strong>Instant Payouts</strong> (same-day to a linked debit card) cost <strong>1%</strong> per payout, minimum $0.50. For cash-flow-tight businesses it can be worth it; for most, the free standard payout is fine.</p>
+
+      <h2>Can you negotiate?</h2>
+      <p>Stripe's published rates apply to essentially everyone under ~$80,000/month in processing. Above that, enterprise pricing is negotiable — you talk to a sales rep and can often get rates down to 2.6% + $0.25 or lower, depending on your vertical and volume. High-risk verticals (CBD, gambling, certain SaaS) may face higher rates; stable verticals (B2B software, e-commerce) get the best deals.</p>
+
+      <h2>The calculator</h2>
+      <p>If you want to see what you'd actually pay on any specific transaction, try <a href="/stripe-fee-calculator">our Stripe fee calculator</a>. Enter an amount and pick the scenario — it handles US cards, international, currency conversion, ACH, and Link, using current 2026 rates.</p>
+      <p>For comparisons against Square, PayPal, and Shopify, try the <a href="/compare">head-to-head comparison</a>.</p>
+
+      <div class="cta-block" style="margin-top: 3rem;">
+        <h3>Run the math on your own numbers</h3>
+        <p class="cta-lede">The Stripe fee calculator handles every scenario we covered here — domestic, international, currency conversion, ACH, Link, Connect-adjacent — with live math as you type.</p>
+        <div class="cta-buttons">
+          <a href="/stripe-fee-calculator" class="cta-btn">Try the Stripe calculator →</a>
+          <a href="/compare" class="cta-btn secondary">Compare all processors</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>netfee.io</h4>
+        <p class="brand-line"><strong>The honest fee calculator.</strong> No sign-up, no email capture, no stored data — just the math, using current rates.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <a href="/stripe-fee-calculator">Stripe fee calculator</a>
+        <a href="/square-fee-calculator">Square fee calculator</a>
+        <a href="/paypal-fee-calculator">PayPal fee calculator</a>
+        <a href="/shopify-fee-calculator">Shopify fee calculator</a>
+        <a href="/compare">Head-to-head comparison</a>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <a href="/guides/how-stripe-fees-work">How Stripe fees work</a>
+        <a href="/guides/hidden-processor-fees">Hidden processor fees</a>
+        <a href="/guides/ach-vs-card">ACH vs card: which is cheaper?</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="legal">
+        © 2026 netfee.io · Operated by Robot Arms LLC (Colorado) · Rates current as of April 2026 · Always verify with the processor before making business decisions · Not affiliated with Stripe, Square, PayPal, or Shopify · Some external links are affiliate links — <a href="/terms#affiliate-disclosure">full disclosure</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

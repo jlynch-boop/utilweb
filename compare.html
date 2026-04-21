@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stripe vs Square vs PayPal: Fees Compared (2026) | netfee.io</title>
+  <title>Stripe vs Square vs PayPal vs Shopify: Fees Compared (2026) | netfee.io</title>
   <meta name="description" content="Compare Stripe, Square, and PayPal transaction fees side-by-side for any amount. Current 2026 rates, worked scenarios, and a verdict for each use case.">
   <link rel="canonical" href="https://netfee.io/compare">
 
   <link rel="icon" type="image/svg+xml" href="/logo.svg">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <meta property="og:title" content="Stripe vs Square vs PayPal: Fees Compared (2026)">
+  <meta property="og:title" content="Stripe vs Square vs PayPal vs Shopify: Fees Compared (2026)">
   <meta property="og:description" content="Compare payment processor fees side-by-side. Current 2026 rates, worked scenarios, and a verdict for each use case.">
   <meta property="og:url" content="https://netfee.io/compare">
   <meta property="og:type" content="website">
@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://netfee.io/og-image.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Stripe vs Square vs PayPal: Fees Compared (2026)">
+  <meta name="twitter:title" content="Stripe vs Square vs PayPal vs Shopify: Fees Compared (2026)">
   <meta name="twitter:description" content="Side-by-side payment processor fee comparison.">
 
   <script type="application/ld+json">
@@ -65,8 +65,8 @@
   <main>
     <section class="hero">
       <div class="container">
-        <h1>Stripe vs Square vs PayPal: Fees Compared</h1>
-        <p class="lede">Run the same transaction through all three processors at once. See the fee, the net take-home, and who wins — instantly, with current 2026 rates.</p>
+        <h1>Stripe vs Square vs PayPal vs Shopify: Fees Compared</h1>
+        <p class="lede">Run the same transaction through all four processors at once. See the fee, the net take-home, and who wins — instantly, with current 2026 rates.</p>
         <p class="trust">Rates verified <strong>April 2026</strong>. We keep the numbers current.</p>
 
         <div class="calc-card" style="margin-top: 2rem;">
@@ -192,6 +192,7 @@
               <th>Stripe</th>
               <th>Square</th>
               <th>PayPal</th>
+              <th>Shopify</th>
             </tr>
           </thead>
           <tbody>
@@ -200,60 +201,77 @@
               <td class="rate">2.9% + $0.30</td>
               <td class="rate">2.9% + $0.30</td>
               <td class="rate">3.49% + $0.49</td>
+              <td class="rate">2.9% + $0.30 (Basic)</td>
             </tr>
             <tr>
               <td>In-person (card-present)</td>
               <td class="rate">2.7% + $0.05 (Terminal)</td>
               <td class="rate winner">2.6% + $0.10</td>
               <td class="rate">2.29% + $0.09 (Zettle)</td>
+              <td class="rate">2.7% (Shopify POS, Basic)</td>
             </tr>
             <tr>
               <td>Keyed (manually typed)</td>
               <td class="rate">2.9% + $0.30</td>
               <td class="rate">3.5% + $0.15</td>
               <td class="rate">3.49% + $0.49</td>
+              <td class="rate">3.5% + $0.30 est.</td>
             </tr>
             <tr>
               <td>International card</td>
               <td class="rate">+1.5% (4.4% + $0.30)</td>
               <td class="rate">Limited support</td>
               <td class="rate">+1.5% (4.99% + $0.49)</td>
+              <td class="rate">+1% (3.9% + $0.30)</td>
             </tr>
             <tr>
               <td>Currency conversion</td>
               <td class="rate">+1%</td>
-              <td class="rate">n/a (no multi-currency)</td>
+              <td class="rate">n/a</td>
               <td class="rate">~4%</td>
+              <td class="rate">+2%</td>
             </tr>
             <tr>
               <td>ACH / bank transfer</td>
-              <td class="rate">0.8% cap $5</td>
-              <td class="rate winner">1% min $1</td>
+              <td class="rate winner">0.8% cap $5</td>
+              <td class="rate">1% min $1</td>
               <td class="rate">3.49% + $0.49</td>
+              <td class="rate">n/a on Basic</td>
             </tr>
             <tr>
               <td>Invoice (card)</td>
               <td class="rate">2.9% + $0.30 + 0.4%</td>
               <td class="rate">3.3% + $0.30</td>
               <td class="rate">3.49% + $0.49</td>
+              <td class="rate">2.9% + $0.30 (Draft Orders)</td>
             </tr>
             <tr>
               <td>Dispute / chargeback fee</td>
               <td class="rate">$15</td>
               <td class="rate winner">$0</td>
               <td class="rate">$20</td>
+              <td class="rate">$15</td>
             </tr>
             <tr>
               <td>Refund fee behavior</td>
-              <td class="rate">Refunds all fees (most accounts)</td>
+              <td class="rate">Refunds all fees</td>
               <td class="rate">Refunds all fees</td>
               <td class="rate">Keeps fixed fee</td>
+              <td class="rate">Refunds all fees</td>
             </tr>
             <tr>
               <td>Micropayments tier</td>
               <td class="rate">—</td>
               <td class="rate">—</td>
               <td class="rate winner">4.99% + $0.09</td>
+              <td class="rate">—</td>
+            </tr>
+            <tr>
+              <td>Monthly subscription</td>
+              <td class="rate winner">$0</td>
+              <td class="rate winner">$0 (Free plan)</td>
+              <td class="rate winner">$0</td>
+              <td class="rate">$39–$399+</td>
             </tr>
           </tbody>
         </table>
@@ -350,6 +368,7 @@
         <a href="/stripe-fee-calculator">Stripe fee calculator</a>
         <a href="/square-fee-calculator">Square fee calculator</a>
         <a href="/paypal-fee-calculator">PayPal fee calculator</a>
+        <a href="/shopify-fee-calculator">Shopify fee calculator</a>
         <a href="/compare">Head-to-head comparison</a>
       </div>
       <div>
@@ -370,39 +389,45 @@
     const SCENARIOS = {
       'online-domestic': {
         label: 'Online domestic: cards entered online via checkout, processed as standard US card-not-present.',
-        stripe: { pct: 0.029, fixed: 0.30, label: '2.9% + $0.30' },
-        square: { pct: 0.029, fixed: 0.30, label: '2.9% + $0.30' },
-        paypal: { pct: 0.0349, fixed: 0.49, label: '3.49% + $0.49' }
+        stripe:  { pct: 0.029,  fixed: 0.30, label: '2.9% + $0.30' },
+        square:  { pct: 0.029,  fixed: 0.30, label: '2.9% + $0.30' },
+        paypal:  { pct: 0.0349, fixed: 0.49, label: '3.49% + $0.49' },
+        shopify: { pct: 0.029,  fixed: 0.30, label: '2.9% + $0.30 (Basic plan)' }
       },
       'in-person': {
         label: 'In-person: physical card dipped, tapped, or swiped via merchant hardware.',
-        stripe: { pct: 0.027, fixed: 0.05, label: '2.7% + $0.05 (Terminal)' },
-        square: { pct: 0.026, fixed: 0.10, label: '2.6% + $0.10' },
-        paypal: { pct: 0.0229, fixed: 0.09, label: '2.29% + $0.09 (Zettle)' }
+        stripe:  { pct: 0.027,  fixed: 0.05, label: '2.7% + $0.05 (Terminal)' },
+        square:  { pct: 0.026,  fixed: 0.10, label: '2.6% + $0.10' },
+        paypal:  { pct: 0.0229, fixed: 0.09, label: '2.29% + $0.09 (Zettle)' },
+        shopify: { pct: 0.027,  fixed: 0.00, label: '2.7% (Shopify POS, Basic plan)' }
       },
       'keyed': {
         label: 'Keyed: card-not-present, manually typed into a POS terminal. Higher interchange cost.',
-        stripe: { pct: 0.029, fixed: 0.30, label: '2.9% + $0.30' },
-        square: { pct: 0.035, fixed: 0.15, label: '3.5% + $0.15' },
-        paypal: { pct: 0.0349, fixed: 0.49, label: '3.49% + $0.49' }
+        stripe:  { pct: 0.029,  fixed: 0.30, label: '2.9% + $0.30' },
+        square:  { pct: 0.035,  fixed: 0.15, label: '3.5% + $0.15' },
+        paypal:  { pct: 0.0349, fixed: 0.49, label: '3.49% + $0.49' },
+        shopify: { pct: 0.035,  fixed: 0.30, label: '3.5% + $0.30 (estimated keyed)' }
       },
       'invoice': {
         label: 'Invoice: sent to the customer, paid online by card.',
-        stripe: { pct: 0.033, fixed: 0.30, label: '3.3% + $0.30 (Stripe Invoicing)' },
-        square: { pct: 0.033, fixed: 0.30, label: '3.3% + $0.30' },
-        paypal: { pct: 0.0349, fixed: 0.49, label: '3.49% + $0.49' }
+        stripe:  { pct: 0.033,  fixed: 0.30, label: '3.3% + $0.30 (Stripe Invoicing)' },
+        square:  { pct: 0.033,  fixed: 0.30, label: '3.3% + $0.30' },
+        paypal:  { pct: 0.0349, fixed: 0.49, label: '3.49% + $0.49' },
+        shopify: { pct: 0.029,  fixed: 0.30, label: '2.9% + $0.30 (Shopify Draft Orders)' }
       },
       'international': {
         label: 'International: non-US card processed by US merchant account.',
-        stripe: { pct: 0.044, fixed: 0.30, label: '4.4% + $0.30' },
-        square: { pct: null, fixed: null, label: 'Limited support', note: 'Square has limited international card support in the US — use Stripe or PayPal.' },
-        paypal: { pct: 0.0499, fixed: 0.49, label: '4.99% + $0.49' }
+        stripe:  { pct: 0.044,  fixed: 0.30, label: '4.4% + $0.30' },
+        square:  { pct: null,   fixed: null, label: 'Limited support', note: 'Square has limited international card support in the US — use Stripe, Shopify, or PayPal.' },
+        paypal:  { pct: 0.0499, fixed: 0.49, label: '4.99% + $0.49' },
+        shopify: { pct: 0.039,  fixed: 0.30, label: '3.9% + $0.30 (Basic + 1% intl surcharge)' }
       },
       'micro': {
         label: 'Micropayments: small transactions ($1–$10). PayPal\'s opt-in tier is uniquely suited here.',
-        stripe: { pct: 0.029, fixed: 0.30, label: '2.9% + $0.30' },
-        square: { pct: 0.029, fixed: 0.30, label: '2.9% + $0.30' },
-        paypal: { pct: 0.0499, fixed: 0.09, label: '4.99% + $0.09 (Micropayments)' }
+        stripe:  { pct: 0.029,  fixed: 0.30, label: '2.9% + $0.30' },
+        square:  { pct: 0.029,  fixed: 0.30, label: '2.9% + $0.30' },
+        paypal:  { pct: 0.0499, fixed: 0.09, label: '4.99% + $0.09 (Micropayments)' },
+        shopify: { pct: 0.029,  fixed: 0.30, label: '2.9% + $0.30 (Basic plan)' }
       }
     };
 
@@ -420,7 +445,8 @@
       const rows = [
         { name: 'Stripe',  ...s.stripe },
         { name: 'Square',  ...s.square },
-        { name: 'PayPal',  ...s.paypal }
+        { name: 'PayPal',  ...s.paypal },
+        { name: 'Shopify', ...s.shopify }
       ].map(p => ({ ...p, fee: calc(amt, p) }))
        .map(p => ({ ...p, net: p.fee === null ? null : Math.max(0, amt - p.fee) }));
 

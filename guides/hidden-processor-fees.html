@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidden Payment Processor Fees (2026) — What the Headline Rates Don't Tell You | netfee.io</title>
+  <meta name="description" content="Beyond the 2.9% + $0.30 headline rate: chargeback fees, refund-fee quirks, international surcharges, currency conversion, monthly minimums, instant-payout fees, and more.">
+  <link rel="canonical" href="https://netfee.io/guides/hidden-processor-fees">
+
+  <link rel="icon" type="image/svg+xml" href="/logo.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:title" content="Hidden Payment Processor Fees (2026)">
+  <meta property="og:description" content="What the headline rates don't tell you about Stripe, Square, PayPal, and Shopify fees.">
+  <meta property="og:url" content="https://netfee.io/guides/hidden-processor-fees">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="netfee.io">
+  <meta property="og:image" content="https://netfee.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://netfee.io/og-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hidden Payment Processor Fees (2026)">
+  <meta name="twitter:description" content="What the headline rates don't tell you.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Hidden Payment Processor Fees (2026)",
+    "description": "Beyond the headline rates: chargebacks, refund quirks, international surcharges, currency conversion, monthly minimums, and payout fees across Stripe, Square, PayPal, and Shopify.",
+    "author": { "@type": "Organization", "name": "netfee.io" },
+    "publisher": { "@type": "Organization", "name": "Robot Arms LLC" },
+    "datePublished": "2026-04-21",
+    "dateModified": "2026-04-21",
+    "image": "https://netfee.io/og-image.png",
+    "mainEntityOfPage": "https://netfee.io/guides/hidden-processor-fees"
+  }
+  </script>
+
+  <!-- Google AdSense (publisher: ca-pub-4144260522213667) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4144260522213667" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-mark" aria-hidden="true"></span>
+        <span>netfee.io</span>
+      </a>
+      <div class="nav-links">
+        <a href="/stripe-fee-calculator">Stripe</a>
+        <a href="/square-fee-calculator">Square</a>
+        <a href="/paypal-fee-calculator">PayPal</a>
+        <a href="/shopify-fee-calculator">Shopify</a>
+        <a href="/compare">Compare</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-body">
+    <article class="container" style="max-width: 780px;">
+      <div class="meta">Guide · April 2026 · 10 min read</div>
+      <h1 style="margin-bottom: 0.5rem;">Hidden payment processor fees</h1>
+      <p class="lede" style="font-size: 1.1rem; color: var(--gray-500); margin-bottom: 2rem;">The 2.9% + $0.30 headline rate is honest, but it's not the whole story. Here's every real-world fee that can land on a transaction — by processor — and when to expect it.</p>
+
+      <h2>Chargeback / dispute fees</h2>
+      <p>When a customer disputes a charge through their card issuer, the processor charges you a fee on top of refunding the money. This is the single most variable cost across processors:</p>
+      <table class="rates-table">
+        <thead><tr><th>Processor</th><th>Dispute fee</th><th>Refunded if you win?</th></tr></thead>
+        <tbody>
+          <tr><td>Stripe</td><td class="rate">$15</td><td>No</td></tr>
+          <tr><td>Square</td><td class="rate winner">$0</td><td>N/A</td></tr>
+          <tr><td>PayPal</td><td class="rate">$20</td><td>No (generally)</td></tr>
+          <tr><td>Shopify</td><td class="rate">$15</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+      <p>Square absorbs dispute fees via Seller Protection (up to $250/month). That's a real differentiator for high-dispute categories — subscriptions, digital goods, event tickets. If you process $100K+/year in high-dispute categories, Square's no-fee policy can save hundreds per month versus Stripe or PayPal.</p>
+
+      <h2>Refund fee quirks</h2>
+      <p>When you refund a transaction, what happens to the original fee? Not all processors treat this the same way:</p>
+      <ul>
+        <li><strong>Stripe:</strong> Most accounts get the full fee refunded (both the 2.9% and the $0.30). Older accounts may only refund the percentage.</li>
+        <li><strong>Square:</strong> Full fee refunded.</li>
+        <li><strong>PayPal:</strong> Keeps the fixed fee ($0.49). Only the percentage is refunded. This is a real drag for high-refund businesses.</li>
+        <li><strong>Shopify:</strong> Full fee refunded on Shopify Payments.</li>
+      </ul>
+      <p>PayPal's policy here dates to 2019. If your refund rate is 5%+ and you're using PayPal, you're eating an extra $0.49 per refunded transaction — $50 on 100 refunds, $500 on 1,000. That adds up.</p>
+
+      <h2>International card surcharges</h2>
+      <p>When a non-US card is used to pay a US merchant, processors add a surcharge:</p>
+      <table class="rates-table">
+        <thead><tr><th>Processor</th><th>Int'l surcharge</th><th>Total rate</th></tr></thead>
+        <tbody>
+          <tr><td>Stripe</td><td class="rate">+1.5%</td><td class="rate">4.4% + $0.30</td></tr>
+          <tr><td>Square</td><td class="rate">Limited support</td><td>—</td></tr>
+          <tr><td>PayPal</td><td class="rate">+1.5%</td><td class="rate">4.99% + $0.49</td></tr>
+          <tr><td>Shopify</td><td class="rate">+1.0%</td><td class="rate">Varies by plan</td></tr>
+        </tbody>
+      </table>
+      <p>Square's international card support is limited — they're primarily a domestic processor in each country they operate. If you sell cross-border from the US, Stripe (best international) or Shopify (decent) are better picks. PayPal handles international but at a premium.</p>
+
+      <h2>Currency conversion fees</h2>
+      <p>When the payment currency differs from your settlement currency, there's a conversion markup:</p>
+      <ul>
+        <li><strong>Stripe:</strong> +1% on top of the exchange rate</li>
+        <li><strong>PayPal:</strong> ~4% on top (highest by a wide margin)</li>
+        <li><strong>Shopify:</strong> +2% on top</li>
+        <li><strong>Square:</strong> Not applicable for most US merchants</li>
+      </ul>
+      <p>For cross-border SaaS, PayPal's 4% currency conversion is the quiet killer. A European customer paying €100 that converts to USD loses ~€4 to PayPal on top of the international surcharge and base rate. Total: ~9% on that transaction.</p>
+
+      <!-- Ad slot -->
+      <div class="ad-slot" data-slot="guide-slot-mid" aria-hidden="true" style="margin: 3rem auto;">
+        <!-- AdSense in-article unit — paste <ins> block after approval -->
+      </div>
+
+      <h2>Keyed / card-not-present penalty</h2>
+      <p>Typing a card number manually (vs. swiping, dipping, or tapping in person) triggers higher rates because card networks flag it as higher-risk:</p>
+      <ul>
+        <li><strong>Square:</strong> 3.5% + $0.15 (up from 2.6% + $0.10 for card-present)</li>
+        <li><strong>Stripe:</strong> No separate keyed rate for online — but in-person via Terminal is 2.7% + $0.05 vs online 2.9% + $0.30</li>
+        <li><strong>PayPal Here / Zettle:</strong> Has separate keyed rates; varies by region</li>
+        <li><strong>Shopify POS:</strong> Matches Square's logic — keyed is more expensive than card-present</li>
+      </ul>
+      <p>If you take phone orders or mail orders where you type in the card, factor the keyed rate into your pricing. It's meaningfully more expensive than card-present.</p>
+
+      <h2>Instant payout fees</h2>
+      <p>Standard payouts are free on every major processor (typically 1–3 business days). But if you need money <em>today</em>, there's a premium:</p>
+      <table class="rates-table">
+        <thead><tr><th>Processor</th><th>Instant payout fee</th></tr></thead>
+        <tbody>
+          <tr><td>Stripe Instant Payouts</td><td class="rate">1% (min $0.50)</td></tr>
+          <tr><td>Square Instant Transfer</td><td class="rate">1.75%</td></tr>
+          <tr><td>PayPal Instant Transfer</td><td class="rate">1.75% (capped at $25)</td></tr>
+          <tr><td>Shopify Payouts</td><td class="rate">1.5%</td></tr>
+        </tbody>
+      </table>
+      <p>For cash-flow-tight businesses instant payouts are lifesavers; for everyone else, the free next-day payout is fine.</p>
+
+      <h2>Third-party gateway penalties (Shopify only)</h2>
+      <p>If you use Shopify's storefront with a non-Shopify-Payments gateway (e.g., Stripe, Authorize.net), Shopify adds an extra transaction fee on top of the gateway's own rate:</p>
+      <ul>
+        <li>Basic plan: <strong>+2%</strong></li>
+        <li>Shopify plan: <strong>+1%</strong></li>
+        <li>Advanced: <strong>+0.5%</strong></li>
+        <li>Plus: negotiable</li>
+      </ul>
+      <p>Using Stripe through Shopify's Basic plan: you pay Stripe's 2.9% + $0.30 <em>plus</em> Shopify's 2% penalty = <strong>4.9% + $0.30</strong>. Rarely worth it. Just use Shopify Payments.</p>
+
+      <h2>Hardware and monthly fees</h2>
+      <p>Pure online processors (Stripe, PayPal Checkout) have no hardware or monthly fees. In-person ecosystems do:</p>
+      <ul>
+        <li><strong>Square hardware:</strong> Free magstripe Reader, $49 contactless Reader, $299 Stand, $1,099 Register. No monthly fee on base plan.</li>
+        <li><strong>Shopify:</strong> $5–$399/month subscription required for a real store.</li>
+        <li><strong>Stripe Terminal:</strong> $59 Reader M2, $349 BBPOS WisePOS E. No monthly fee on standard accounts.</li>
+        <li><strong>PayPal Zettle:</strong> $29 card reader. No monthly fee on base.</li>
+      </ul>
+
+      <h2>Monthly minimums and account fees</h2>
+      <p>None of Stripe, Square, PayPal (standard), or Shopify Payments charge a monthly minimum transaction fee. This is a big win over traditional merchant accounts (which can charge $25+/month if you don't hit minimums). The modern processor model is pure per-transaction pricing.</p>
+      <p>Exception: Shopify's monthly subscription ($5–$399) is effectively a minimum. You pay it whether you process $1 or $100,000.</p>
+
+      <h2>Invoicing &amp; subscription add-ons</h2>
+      <p>Each processor has optional paid products that sit on top of basic processing:</p>
+      <ul>
+        <li><strong>Stripe Invoicing:</strong> 2.9% + $0.30 + <strong>0.4%</strong> extra per paid invoice (for Advanced features). Light Invoicing is free.</li>
+        <li><strong>Stripe Billing / subscriptions:</strong> 0.4% of recurring charges (Basic) or 0.8% (Advanced).</li>
+        <li><strong>Square Invoices:</strong> 3.3% + $0.30 (no extra charge over card).</li>
+        <li><strong>PayPal Invoicing:</strong> 3.49% + $0.49 (same as Checkout).</li>
+      </ul>
+      <p>Stripe's Billing pricing for subscriptions can surprise SaaS founders. A subscription business running through Stripe Billing Advanced pays 2.9% + $0.30 + 0.8% = effectively 3.7% + $0.30. Still reasonable; just know about it.</p>
+
+      <h2>Radar / fraud protection</h2>
+      <p>Basic fraud screening is included on every major processor. The paid tiers offer custom rules and manual review:</p>
+      <ul>
+        <li><strong>Stripe Radar for Fraud Teams:</strong> $0.05 per screened charge</li>
+        <li><strong>Square Seller Protection:</strong> Free (covers up to $250/month in disputes)</li>
+        <li><strong>PayPal Seller Protection:</strong> Free on qualifying transactions</li>
+        <li><strong>Shopify Fraud Analysis:</strong> Free (basic), $9+ for Shopify Fraud Control</li>
+      </ul>
+
+      <h2>Holds on new accounts</h2>
+      <p>This one's not a fee, but it hits cash flow the same way. New accounts often have rolling reserves or delayed payouts:</p>
+      <ul>
+        <li><strong>Stripe:</strong> 7-day rolling reserve on new accounts, released after history builds.</li>
+        <li><strong>Square:</strong> Typically no holds for low-risk verticals; risk-score-driven.</li>
+        <li><strong>PayPal:</strong> Notorious for 21-day holds on first ~$2K–$5K. Plan cash flow accordingly.</li>
+        <li><strong>Shopify Payments:</strong> 3-day rolling reserve on new accounts.</li>
+      </ul>
+      <p>If you need immediate access to revenue, PayPal's holds are a real planning constraint for new merchants.</p>
+
+      <h2>The real "all-in" cost</h2>
+      <p>Headline rates are useful for comparison but your actual cost depends on the mix of scenarios in your business. For most merchants, realistic all-in cost of processing is:</p>
+      <ul>
+        <li><strong>Domestic US online e-commerce, low dispute:</strong> ~2.9–3.2% + $0.30 (close to headline)</li>
+        <li><strong>International SaaS with currency conversion:</strong> ~5.5–9% + $0.30 depending on processor mix</li>
+        <li><strong>B2B invoicing where you can push to ACH:</strong> ~1% effective (huge win over card)</li>
+        <li><strong>Subscription with refunds &amp; disputes:</strong> 3.5–4.5% effective, heavily dependent on processor choice (PayPal worst, Square best on dispute costs)</li>
+      </ul>
+
+      <h2>Running your own numbers</h2>
+      <p>The calculators on netfee.io model all of the above. If you want to see what any specific scenario costs — including international, currency conversion, ACH, micropayments, and keyed — run it through the head-to-head comparison or the individual processor calculators:</p>
+      <ul>
+        <li><a href="/stripe-fee-calculator">Stripe fee calculator</a></li>
+        <li><a href="/square-fee-calculator">Square fee calculator</a></li>
+        <li><a href="/paypal-fee-calculator">PayPal fee calculator</a></li>
+        <li><a href="/shopify-fee-calculator">Shopify fee calculator</a></li>
+        <li><a href="/compare">Head-to-head: Stripe vs Square vs PayPal</a></li>
+      </ul>
+
+      <div class="cta-block" style="margin-top: 3rem;">
+        <h3>Run your real numbers</h3>
+        <p class="cta-lede">Headline rates mislead. Model your actual transaction mix through the calculators and see what you'd really pay.</p>
+        <div class="cta-buttons">
+          <a href="/compare" class="cta-btn">Compare all processors →</a>
+          <a href="/stripe-fee-calculator" class="cta-btn secondary">Stripe only</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>netfee.io</h4>
+        <p class="brand-line"><strong>The honest fee calculator.</strong> No sign-up, no email capture, no stored data — just the math, using current rates.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <a href="/stripe-fee-calculator">Stripe fee calculator</a>
+        <a href="/square-fee-calculator">Square fee calculator</a>
+        <a href="/paypal-fee-calculator">PayPal fee calculator</a>
+        <a href="/shopify-fee-calculator">Shopify fee calculator</a>
+        <a href="/compare">Head-to-head comparison</a>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <a href="/guides/how-stripe-fees-work">How Stripe fees work</a>
+        <a href="/guides/hidden-processor-fees">Hidden processor fees</a>
+        <a href="/guides/ach-vs-card">ACH vs card: which is cheaper?</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="legal">
+        © 2026 netfee.io · Operated by Robot Arms LLC (Colorado) · Rates current as of April 2026 · Always verify with the processor before making business decisions · Not affiliated with Stripe, Square, PayPal, or Shopify · Some external links are affiliate links — <a href="/terms#affiliate-disclosure">full disclosure</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

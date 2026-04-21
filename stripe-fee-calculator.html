@@ -110,6 +110,7 @@
         <a href="/stripe-fee-calculator" class="active">Stripe</a>
         <a href="/square-fee-calculator">Square</a>
         <a href="/paypal-fee-calculator">PayPal</a>
+        <a href="/shopify-fee-calculator">Shopify</a>
         <a href="/compare">Compare</a>
       </div>
     </div>
@@ -327,29 +328,34 @@
 
     <section class="content">
       <div class="container">
-        <h2>Stripe vs Square vs PayPal fees</h2>
-        <p class="prose">Stripe is not cheapest for every case. Square is cheaper for small in-person transactions; PayPal is sometimes better for certain international flows; some processors beat all three on volume pricing. Run the math for your specific situation:</p>
+        <h2>Stripe vs Square vs PayPal vs Shopify fees</h2>
+        <p class="prose">Stripe is not cheapest for every case. Square is cheaper for small in-person transactions; PayPal is sometimes better for trust-sensitive international flows; Shopify matches Stripe per-transaction but includes a full storefront. Run the math for your specific situation:</p>
 
         <div class="compare-grid">
-          <a href="/stripe-fee-calculator" class="compare-card" style="border-color: var(--accent);">
+          <a href="/stripe-fee-calculator" class="compare-card current">
             <h3>Stripe</h3>
             <div class="rate-line">2.9% + $0.30 · US card</div>
-            <a>Current page →</a>
+            <span class="link">Current page</span>
           </a>
-          <a href="/square-fee-calculator" class="compare-card soon" aria-disabled="true">
+          <a href="/square-fee-calculator" class="compare-card">
             <h3>Square</h3>
             <div class="rate-line">2.6% + $0.10 · in-person</div>
-            <a>Calculator coming soon</a>
+            <span class="link">Calculate Square fees →</span>
           </a>
-          <a href="/paypal-fee-calculator" class="compare-card soon" aria-disabled="true">
+          <a href="/paypal-fee-calculator" class="compare-card">
             <h3>PayPal</h3>
-            <div class="rate-line">3.49% + $0.49 · online</div>
-            <a>Calculator coming soon</a>
+            <div class="rate-line">3.49% + $0.49 · Checkout</div>
+            <span class="link">Calculate PayPal fees →</span>
           </a>
-          <a href="/compare" class="compare-card soon" aria-disabled="true">
+          <a href="/shopify-fee-calculator" class="compare-card">
+            <h3>Shopify</h3>
+            <div class="rate-line">2.9% + $0.30 · Basic plan</div>
+            <span class="link">Calculate Shopify fees →</span>
+          </a>
+          <a href="/compare" class="compare-card">
             <h3>Head-to-head</h3>
-            <div class="rate-line">Compare all three at your volume</div>
-            <a>Comparison coming soon</a>
+            <div class="rate-line">Compare all processors at your volume</div>
+            <span class="link">Open comparison →</span>
           </a>
         </div>
       </div>
@@ -455,6 +461,7 @@
         <a href="/stripe-fee-calculator">Stripe fee calculator</a>
         <a href="/square-fee-calculator">Square fee calculator</a>
         <a href="/paypal-fee-calculator">PayPal fee calculator</a>
+        <a href="/shopify-fee-calculator">Shopify fee calculator</a>
         <a href="/compare">Head-to-head comparison</a>
       </div>
       <div>
