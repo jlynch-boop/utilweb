@@ -40,3 +40,6 @@ build/
 Thumbs.db
 Desktop.ini
 .cache/
+
+.dev.vars*
+!.dev.vars.example
